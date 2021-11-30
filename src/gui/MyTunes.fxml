@@ -37,15 +37,15 @@
       </Label>
       <Label layoutX="246.0" layoutY="75.0" text="Songs on Playlist" />
       <Label layoutX="507.0" layoutY="75.0" text="Songs" />
-      <Button layoutX="507.0" layoutY="485.0" mnemonicParsing="false" prefHeight="26.0" text="Add To Playlist" />
-      <Button layoutX="28.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="New" />
-      <Button layoutX="102.0" layoutY="485.0" mnemonicParsing="false" text="Update" />
-      <Button layoutX="172.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
-      <Button layoutX="246.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Up" />
-      <Button layoutX="309.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Down" />
-      <Button layoutX="414.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
-      <Button layoutX="677.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="New" />
-      <Button layoutX="742.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Edit" />
-      <Button layoutX="816.0" layoutY="485.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+      <Button layoutX="507.0" layoutY="485.0" mnemonicParsing="false" onAction="#AddToPlaylist" prefHeight="26.0" text="Add To Playlist" />
+      <Button layoutX="28.0" layoutY="485.0" mnemonicParsing="false" onAction="#NewPlaylist" prefHeight="25.0" prefWidth="55.0" text="New" />
+      <Button layoutX="102.0" layoutY="485.0" mnemonicParsing="false" onAction="#UpdatePlaylist" text="Update" />
+      <Button layoutX="172.0" layoutY="485.0" mnemonicParsing="false" onAction="#DeletePlaylist" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+      <Button layoutX="246.0" layoutY="485.0" mnemonicParsing="false" onAction="#PositionUp" prefHeight="25.0" prefWidth="55.0" text="Up" />
+      <Button layoutX="309.0" layoutY="485.0" mnemonicParsing="false" onAction="#PositionDown" prefHeight="25.0" prefWidth="55.0" text="Down" />
+      <Button layoutX="414.0" layoutY="485.0" mnemonicParsing="false" onAction="#RemoveFromPlaylist" prefHeight="25.0" prefWidth="55.0" text="Delete" />
+      <Button layoutX="677.0" layoutY="485.0" mnemonicParsing="false" onAction="#NewSong" prefHeight="25.0" prefWidth="55.0" text="New" />
+      <Button layoutX="742.0" layoutY="485.0" mnemonicParsing="false" onAction="#EditSong" prefHeight="25.0" prefWidth="55.0" text="Edit" />
+      <Button layoutX="816.0" layoutY="485.0" mnemonicParsing="false" onAction="#DeleteSong" prefHeight="25.0" prefWidth="55.0" text="Delete" />
    </children>
 </AnchorPane>

@@ -21,7 +21,7 @@ public class DatabaseConnector {
         dataSource.setUser(props.getProperty("username"));
         dataSource.setPassword(props.getProperty("pw"));
         dataSource.setServerName(props.getProperty("server"));
-        dataSource.setPortNumber(1433);
+        //dataSource.setPortNumber(1433);
 
     }
 

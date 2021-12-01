@@ -20,7 +20,7 @@ public class MyTunesController {
     @FXML
     private TableColumn<Song, String> tcSongTitle;
     @FXML
-    private TableColumn<Song, String> tcSongArtsist;
+    private TableColumn<Song, String> tcSongArtist;
     @FXML
     private TableColumn<Song, Integer> tcSongTime;
     @FXML
@@ -32,6 +32,7 @@ public class MyTunesController {
 
 
     public void AddToPlaylist(ActionEvent actionEvent) {
+
     }
 
     public void NewPlaylist(ActionEvent actionEvent) {

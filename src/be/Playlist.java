@@ -22,7 +22,9 @@ public class Playlist
         this.playlistName = playlistName;
 
     }
-
+    /*
+    Beneath we have getters for all the properties of the class, and a single setter for the playlist name.
+     */
     /*
     Here we want to return the list of songs
      */

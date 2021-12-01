@@ -11,26 +11,26 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesController">
    <children>
-      <ListView layoutX="246.0" layoutY="92.0" prefHeight="382.0" prefWidth="243.0" />
+      <ListView fx:id="lvPlaylistSongs" layoutX="246.0" layoutY="92.0" prefHeight="382.0" prefWidth="243.0" />
       <Label layoutX="38.0" layoutY="75.0" text="Playlists" />
-      <TableView layoutX="28.0" layoutY="92.0" prefHeight="382.0" prefWidth="200.0">
+      <TableView fx:id="tvPlaylists" layoutX="28.0" layoutY="92.0" prefHeight="382.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="88.0" text="Name" />
-          <TableColumn prefWidth="47.0" text="Songs" />
-            <TableColumn prefWidth="64.0" text="time" />
+          <TableColumn fx:id="tcPlaylistName" prefWidth="88.0" text="Name" />
+          <TableColumn fx:id="tcNumberSongs" prefWidth="47.0" text="Songs" />
+            <TableColumn fx:id="tcPlaylistTime" prefWidth="64.0" text="Time" />
         </columns>
       </TableView>
-      <TableView layoutX="507.0" layoutY="92.0" prefHeight="382.0" prefWidth="364.0">
+      <TableView fx:id="tvSongTable" layoutX="507.0" layoutY="92.0" prefHeight="382.0" prefWidth="364.0">
          <columns>
-            <TableColumn prefWidth="143.0" text="Title" />
-            <TableColumn prefWidth="145.0" text="Artist" />
-            <TableColumn prefWidth="75.0" text="Time" />
+            <TableColumn fx:id="tcSongTitle" prefWidth="143.0" text="Title" />
+            <TableColumn fx:id="tcSongArtsist" prefWidth="145.0" text="Artist" />
+            <TableColumn fx:id="tcSongTime" prefWidth="75.0" text="Time" />
          </columns>
       </TableView>
-      <TextField layoutX="689.0" layoutY="34.0" prefHeight="25.0" prefWidth="106.0" />
+      <TextField fx:id="txtSearchBar" layoutX="689.0" layoutY="34.0" prefHeight="25.0" prefWidth="106.0" />
       <Label layoutX="648.0" layoutY="38.0" text="Filter:" />
-      <Button layoutX="820.0" layoutY="34.0" mnemonicParsing="false" prefHeight="25.0" text="search" />
-      <Label layoutX="331.0" layoutY="46.0" text="Something is playing">
+      <Button layoutX="820.0" layoutY="34.0" mnemonicParsing="false" onAction="#Search" prefHeight="25.0" text="search" />
+      <Label fx:id="lblNowPlaying" layoutX="331.0" layoutY="46.0" text="Something is playing">
          <font>
             <Font size="15.0" />
          </font>

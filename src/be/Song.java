@@ -21,7 +21,8 @@ public class Song
     }
 
     /*
-    Beneath we have getters and setters for the different properties of the class - we dont have a setter for ID since we want our database to handle the ID.
+    Beneath we have getters and setters for the different properties of the class,
+    we don't have a setter for ID since we want our database to handle the ID.
      */
     public String getName() {
         return name.get();

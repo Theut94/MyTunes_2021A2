@@ -1,4 +1,4 @@
-package Data;
+package dal;
 
 import com.microsoft.sqlserver.jdbc.*;
 
@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-public class MockDataAccess {
+public class DatabaseConnector {
 
 
     private SQLServerDataSource dataSource;
 
-    private MockDataAccess() throws IOException
+    private DatabaseConnector() throws IOException
     {
         Properties props = new Properties();
-        props.load(new FileReader("src/Data/DataAccess.txt"));
+        props.load(new FileReader("src/dal/DataAccess.txt"));
         dataSource = new SQLServerDataSource();
         dataSource.setDatabaseName(props.getProperty("database"));
         dataSource.setUser(props.getProperty("username"));
@@ -31,8 +31,8 @@ public class MockDataAccess {
     }
 
 
-    public static void main(String[] args)  throws Exception, SQLServerException{
-        MockDataAccess DA = new MockDataAccess();
+    public static void main(String[] args)  throws Exception{
+        DatabaseConnector DA = new DatabaseConnector();
         DA.getConnection();
     }
 

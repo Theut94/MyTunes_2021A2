@@ -1,12 +1,11 @@
-
-
 package Data;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 public class MockDataAccess {
 
 
-    //private SQLServerDataSource dataSource;
+    private SQLServerDataSource dataSource;
 
     private MockDataAccess() {
 

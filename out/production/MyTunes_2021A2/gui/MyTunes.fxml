@@ -23,7 +23,7 @@
       <TableView fx:id="tvSongTable" layoutX="507.0" layoutY="92.0" prefHeight="382.0" prefWidth="364.0">
          <columns>
             <TableColumn fx:id="tcSongTitle" prefWidth="143.0" text="Title" />
-            <TableColumn fx:id="tcSongArtsist" prefWidth="145.0" text="Artist" />
+            <TableColumn fx:id="tcSongArtist" prefWidth="145.0" text="Artist" />
             <TableColumn fx:id="tcSongTime" prefWidth="75.0" text="Time" />
          </columns>
       </TableView>

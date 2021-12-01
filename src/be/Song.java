@@ -12,11 +12,13 @@ public class Song
     private StringProperty artistName;
     private IntegerProperty songLength;
     private IntegerProperty songId;
+    private String filePath;
 
-    public Song(StringProperty name, StringProperty artistName, IntegerProperty songLength)
+    public Song(StringProperty name, StringProperty artistName,String filePath, IntegerProperty songLength)
     {
         this.name = name;
         this.artistName = artistName;
+        this.filePath = filePath;
         this.songLength = songLength;
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 public class Playlist
 {
     private StringProperty playlistName = new SimpleStringProperty();
-    private List listOfSongs;
+    private List listOfSongs = new ArrayList();
     private IntegerProperty playlistSongCount;
     private IntegerProperty playlistTimelength;
     private int playlistId;

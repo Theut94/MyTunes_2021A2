@@ -1,6 +1,8 @@
 package bll;
 
 import be.Song;
+import bll.util.SongSearcher;
+import dal.PlaylistDAO;
 import dal.SongDAO;
 
 import java.io.IOException;
@@ -10,13 +12,19 @@ import java.util.List;
 /**
  * This is the class where we handle input from the Gui and  use methods from the dal and be, to return the right output.
  */
-public class LogicModel
+public class LogicManager
 {
     SongDAO songDAO = new SongDAO();
+    PlaylistDAO playlistDAO = new PlaylistDAO();
+    SongSearcher songSearcher = new SongSearcher();
 
-    public LogicModel() throws IOException
+    public LogicManager() throws IOException
     {
     }
+
+    /**
+     *Methods for SongDAO.
+     */
     // here we create a song with the input from the gui, sending it to Dal and we need to add it to the observablelist ?
     public Song createSong (String name, String artistName, String filePath, Integer songLength) throws Exception
     {
@@ -37,4 +45,16 @@ public class LogicModel
     {
         songDAO.updateSong(song);
     }
+
+    public List<Song> searchSongs(String query) throws Exception {
+        List<Song> allSongs = getAllSongs();
+        List<Song> searchedSongs= songSearcher.SearchSongs(allSongs, query);
+        return searchedSongs;
+
+    }
+
+    /**
+     * Methods for PlaylistDAO.
+     */
+
 }

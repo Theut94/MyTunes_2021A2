@@ -72,7 +72,7 @@ public class SongDAO
         int songId = -1;
 
         
-        String sql = "INSERT INTO (TABLENAME) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO songsTable VALUES (?,?,?,?);";
         try (Connection connection = DC.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //statement.setString(parameterindex, parameter) for alle parametre tabellen skal bruge.

@@ -4,9 +4,13 @@ import be.Playlist;
 import be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class MyTunesController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MyTunesController implements Initializable {
     @FXML
     private TableView<Playlist> tvPlaylists;
     @FXML
@@ -28,9 +32,14 @@ public class MyTunesController {
     @FXML
     private Label lblNowPlaying;
     @FXML
-    private ListView<String> lvPlaylistSongs;
+    private ListView<Song> lvPlaylistSongs;
 
+    private MyTunesModel myTunesModel;
 
+    public MyTunesController() throws Exception {
+
+        myTunesModel = new MyTunesModel();
+    }
     public void addToPlaylist(ActionEvent actionEvent) {
 
     }
@@ -71,5 +80,12 @@ public class MyTunesController {
     }
 
     public void search(ActionEvent actionEvent) {
+    }
+
+    // needs fixing
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        tvSongTable.setItems(myTunesModel.getSonglist());
     }
 }

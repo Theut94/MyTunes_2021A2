@@ -16,9 +16,9 @@ public class Song
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 
-    public Song(Integer songId, String name, String artistName,String filePath)
+    public Song(int songID, String name, String artistName,String filePath)
     {
-        this.songId.set(songId);
+        this.songId.set(songID);
         this.name.set(name);
         this.artistName.set(artistName);
         this.filePath = filePath;

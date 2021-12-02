@@ -32,6 +32,14 @@ public class Playlist
     {
         return listOfSongs;
     }
+    public void addSongToList(Song song)
+    {
+        listOfSongs.add(song);
+    }
+    public void removeSong(Song song)
+    {
+        listOfSongs.remove(song);
+    }
 
     public String getPlaylistName() {
         return playlistName.get();
@@ -51,5 +59,21 @@ public class Playlist
 
     public int getPlaylistId() {
         return playlistId;
+    }
+
+    public void setPlaylistId(int playlistId) {
+        this.playlistId = playlistId;
+    }
+
+    public void setPlaylistSongCount(int playlistSongCount) {
+        this.playlistSongCount.set(playlistSongCount);
+    }
+
+    public void setPlaylistTimelength(int playlistTimelength) {
+        this.playlistTimelength.set(playlistTimelength);
+    }
+
+    public void setListOfSongs(List listOfSongs) {
+        this.listOfSongs = listOfSongs;
     }
 }

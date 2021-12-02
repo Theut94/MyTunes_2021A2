@@ -61,7 +61,7 @@ public class PlaylistDAO {
         int pId = playlist.getPlaylistId();
         String name = playlist.getPlaylistName();
 
-        String sql = "Update playlist set name = (?) where id = (?);";
+        String sql = "Update playlist set playlistName = (?) where playlistID = (?);";
 
         PreparedStatement pst = con.prepareStatement(sql);
         pst.setString(1, name);

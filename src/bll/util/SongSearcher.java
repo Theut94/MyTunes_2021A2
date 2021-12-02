@@ -5,7 +5,6 @@ import be.Song;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * This is the class that handles searching for songs through a list of songs - mainly for All Songs.

@@ -26,13 +26,14 @@ public class PlaylistDAO {
     //creates a new playlist
     //@param name
     //@return Playlist
-    public Playlist createPlaylist(String name) throws Exception
+    public Playlist createPlaylist(int ID, String name) throws Exception
     {
         Connection con = DC.getConnection();
 
-        String sql = "INSERT INTO playlistTable VALUES (?);";
+        String sql = "INSERT INTO playlistTable VALUES (?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, name);
+        ps.setInt(1, ID);
+        ps.setString(2, name);
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 1)
         {
@@ -111,6 +112,27 @@ public class PlaylistDAO {
         return playlistWithSongs;
     }
 
+    //sletter en playliste
+    public void deletePlaylist(Playlist playlist) throws Exception
+    {
+        Connection con = DC.getConnection();
+        int pId = playlist.getPlaylistId();
+
+        String sqlPt = "DELETE FROM playlistContentTable where playlistID = (?); ";
+        String sqlP = "DELETE FROM playlistTABLE where playlistID=(?);";
+
+        PreparedStatement ps1 = con.prepareStatement(sqlPt);
+        PreparedStatement ps2 = con.prepareStatement(sqlP);
+
+        ps1.setInt(1, pId);
+        ps2.setInt(1, pId);
+        ps1.executeUpdate();
+        ps2.executeUpdate();
+        ps1.close();
+        ps2.close();
+
+    }
+
 
     //updates a single playlist with is new name
     //@param playlist
@@ -135,10 +157,16 @@ public class PlaylistDAO {
     public static void main(String[] args) throws Exception{
         PlaylistDAO DAO = new PlaylistDAO();
         Playlist playlist = new Playlist(1,"Power Metal");
+        Playlist playlist2 = new Playlist(3,"TestPlaylist");
         List<Song> songs = DAO.getPlaylist(playlist);
-        for (Song s: songs) {
-            System.out.println(s.getName() + " : " + s.getArtistName());
+        //DAO.createPlaylist(DAO.getAllPlaylist().size() + 1,"TestPlaylist");
+        //DAO.createPlaylist(3,"TestPlaylist");
+        DAO.deletePlaylist(playlist2);
+        for (Playlist p: DAO.getAllPlaylist() ) {
+            System.out.println(p.getPlaylistName());
         }
-        DAO.createPlaylist("TestPlaylist");
+        //for (Song s: songs) {
+        //    System.out.println(s.getName() + " : " + s.getArtistName());
+        //}
     }
 }

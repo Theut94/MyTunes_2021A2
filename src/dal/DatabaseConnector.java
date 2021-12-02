@@ -12,7 +12,7 @@ public class DatabaseConnector {
 
     private SQLServerDataSource dataSource;
 
-    private DatabaseConnector() throws IOException
+    public DatabaseConnector() throws IOException
     {
         Properties props = new Properties();
         props.load(new FileReader("src/dal/DataAccess.txt"));
@@ -21,7 +21,6 @@ public class DatabaseConnector {
         dataSource.setUser(props.getProperty("username"));
         dataSource.setPassword(props.getProperty("pw"));
         dataSource.setServerName(props.getProperty("server"));
-        //dataSource.setPortNumber(1433);
 
     }
 

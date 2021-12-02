@@ -19,7 +19,7 @@ public class SongDAO
     {
 
     }
-
+/*
     public Song createSong(StringProperty name, StringProperty artistName, String filePath, IntegerProperty songLength) throws Exception
     {   String sql = "INSERT INT (TABLENAME) VALUES (?,?,?,?);";
         try (Connection connection = DC.getConnection()) {
@@ -28,5 +28,5 @@ public class SongDAO
             //statement.executeUpdate(); for at få indsætte parametrene.
         }
         return new Song(name, artistName,filePath,songLength);
-    }
+    }*/
 }

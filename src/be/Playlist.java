@@ -1,6 +1,7 @@
 package be;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
@@ -11,15 +12,16 @@ import java.util.List;
  */
 public class Playlist
 {
-    private StringProperty playlistName;
+    private StringProperty playlistName = new SimpleStringProperty();
     private List listOfSongs;
     private IntegerProperty playlistSongCount;
     private IntegerProperty playlistTimelength;
     private int playlistId;
 
-    public Playlist(StringProperty playlistName)
+    public Playlist(Integer playlistID, String playlistName)
     {
-        this.playlistName = playlistName;
+        this.playlistId = playlistID;
+        this.playlistName.setValue(playlistName);
 
     }
     /*

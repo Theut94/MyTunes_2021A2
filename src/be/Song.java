@@ -1,6 +1,8 @@
 package be;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -8,18 +10,18 @@ import javafx.beans.property.StringProperty;
  */
 public class Song
 {
-    private StringProperty name;
-    private StringProperty artistName;
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty artistName = new SimpleStringProperty();
     private IntegerProperty songLength;
-    private IntegerProperty songId;
+    private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 
-    public Song(StringProperty name, StringProperty artistName,String filePath, IntegerProperty songLength)
+    public Song(Integer songId, String name, String artistName,String filePath)
     {
-        this.name = name;
-        this.artistName = artistName;
+        this.songId.set(songId);
+        this.name.set(name);
+        this.artistName.set(artistName);
         this.filePath = filePath;
-        this.songLength = songLength;
     }
 
     /*

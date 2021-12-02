@@ -31,37 +31,45 @@ public class MyTunesController {
     private ListView<String> lvPlaylistSongs;
 
 
-    public void AddToPlaylist(ActionEvent actionEvent) {
+    public void addToPlaylist(ActionEvent actionEvent) {
 
     }
 
-    public void NewPlaylist(ActionEvent actionEvent) {
+    public void newPlaylist(ActionEvent actionEvent) {
+        // TODO: Open Playlist window
     }
 
-    public void UpdatePlaylist(ActionEvent actionEvent) {
+    public void updatePlaylist(ActionEvent actionEvent) {
+        // TODO: Open Playlist window
     }
 
-    public void DeletePlaylist(ActionEvent actionEvent) {
+    public void deletePlaylist(ActionEvent actionEvent) {
+        int confirm = DeleteDialog.run();
     }
 
-    public void PositionUp(ActionEvent actionEvent) {
+    public void positionUp(ActionEvent actionEvent) {
     }
 
-    public void PositionDown(ActionEvent actionEvent) {
+    public void positionDown(ActionEvent actionEvent) {
     }
 
-    public void RemoveFromPlaylist(ActionEvent actionEvent) {
+    public void removeFromPlaylist(ActionEvent actionEvent) {
+        int confirm = DeleteDialog.run();
     }
 
-    public void NewSong(ActionEvent actionEvent) {
+    public void newSong(ActionEvent actionEvent) {
+        // TODO: Open Song window
     }
 
-    public void EditSong(ActionEvent actionEvent) {
+    public void editSong(ActionEvent actionEvent) {
+        // TODO: Open Song window
     }
 
-    public void DeleteSong(ActionEvent actionEvent) {
+    public void deleteSong(ActionEvent actionEvent) {
+        int confirm = DeleteDialog.run();
+        System.out.println(confirm);
     }
 
-    public void Search(ActionEvent actionEvent) {
+    public void search(ActionEvent actionEvent) {
     }
 }

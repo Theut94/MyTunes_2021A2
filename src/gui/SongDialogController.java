@@ -15,6 +15,7 @@ public class SongDialogController {
     private TextField txtPath;
 
     public void ChoosePath(ActionEvent actionEvent) {
+        // TODO: Open window to pick file
     }
 
     public void Cancel(ActionEvent actionEvent) {

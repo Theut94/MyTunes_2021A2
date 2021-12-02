@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * This is the class that handles searching for songs through a list of songs - mainly for All Songs.
+ */
 public class SongSearcher {
     public List<Song> SearchSongs(List<Song> searchBase, String searchQuery) throws Exception {
         ArrayList<Song> searchedSongs = new ArrayList<>();
@@ -18,11 +21,13 @@ public class SongSearcher {
         return searchedSongs;
     }
 
+    // here we compare the input to artist names.
     private boolean compareToArtistName(String query, Song song)
     {
         return song.getArtistName().toLowerCase().contains(query.toLowerCase());
     }
 
+    //here we compare the input to Song names.
     private boolean compareToSongName(String query, Song song)
     {
         return song.getName().toLowerCase().contains(query.toLowerCase());

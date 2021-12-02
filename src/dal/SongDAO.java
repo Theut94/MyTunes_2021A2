@@ -11,6 +11,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is where we access data for all songs.
+ */
 public class SongDAO
 {
     DatabaseConnector DC = new DatabaseConnector();
@@ -26,6 +29,8 @@ public class SongDAO
         SongDAO SDAO = new SongDAO();
         System.out.println(SDAO.getAllSongs());
     }
+
+    // This is the method to get all available songs in the database.
     public List<Song> getAllSongs() throws SQLException
     {
         ArrayList<Song> allSongs = new ArrayList<>();
@@ -60,6 +65,7 @@ public class SongDAO
         return allSongs;
     }
 
+    // This is the method to create a song in the Database. This is also where the song gets an ID.
     public Song createSong(String name, String artistName, String filePath, Integer songLength) throws Exception
     {   
         int songId = -1;

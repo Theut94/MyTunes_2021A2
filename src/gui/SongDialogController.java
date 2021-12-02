@@ -14,13 +14,13 @@ public class SongDialogController {
     @FXML
     private TextField txtPath;
 
-    public void ChoosePath(ActionEvent actionEvent) {
+    public void choosePath(ActionEvent actionEvent) {
         // TODO: Open window to pick file
     }
 
-    public void Cancel(ActionEvent actionEvent) {
+    public void cancel(ActionEvent actionEvent) {
     }
 
-    public void Save(ActionEvent actionEvent) {
+    public void save(ActionEvent actionEvent) {
     }
 }

@@ -1,6 +1,7 @@
 package dal;
 
 import be.Song;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -89,6 +90,45 @@ public class SongDAO
         if ( songId != -1)
         return new Song(songId, name, artistName,filePath);
         else return null;
+    }
+
+    public void deleteSong(Song song)
+    {
+        String sql1 = "DELETE WHERE songID = (?) FROM playlistContentTable;";
+
+        String sql2 = "DELETE where songID = (?) FROM songsTable;";
+
+        try(Connection connection = DC.getConnection())
+        {
+            PreparedStatement statement1 = connection.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
+            statement1.setInt(1, song.getSongId());
+            statement1.executeUpdate();
+
+            PreparedStatement statement2 = connection.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
+            statement2.setInt(1, song.getSongId());
+            statement2.executeUpdate();
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void updateSong(Song song)
+    {
+        String sql = "UPDATE songsTable SET songName= (?), artist=(?),time=(?) WHERE songID = (?);";
+        try(Connection connection = DC.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, song.getName());
+            statement.setString(2, song.getArtistName());
+            statement.setInt(3,song.getSongLength());
+            statement.setInt(4,song.getSongId());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

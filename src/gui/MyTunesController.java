@@ -36,15 +36,15 @@ public class MyTunesController {
     }
 
     public void newPlaylist(ActionEvent actionEvent) {
-        // TODO: Open Playlist window
+        String name = SimpleDialog.playlist();
     }
 
     public void updatePlaylist(ActionEvent actionEvent) {
-        // TODO: Open Playlist window
+        String name = SimpleDialog.playlist();
     }
 
     public void deletePlaylist(ActionEvent actionEvent) {
-        int confirm = DeleteDialog.run();
+        int confirm = SimpleDialog.delete();
     }
 
     public void positionUp(ActionEvent actionEvent) {
@@ -54,7 +54,7 @@ public class MyTunesController {
     }
 
     public void removeFromPlaylist(ActionEvent actionEvent) {
-        int confirm = DeleteDialog.run();
+        int confirm = SimpleDialog.delete();
     }
 
     public void newSong(ActionEvent actionEvent) {
@@ -66,7 +66,7 @@ public class MyTunesController {
     }
 
     public void deleteSong(ActionEvent actionEvent) {
-        int confirm = DeleteDialog.run();
+        int confirm = SimpleDialog.delete();
         System.out.println(confirm);
     }
 

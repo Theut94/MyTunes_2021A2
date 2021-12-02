@@ -18,7 +18,7 @@ public class Playlist
     private IntegerProperty playlistTimelength;
     private int playlistId;
 
-    public Playlist(Integer playlistID, String playlistName)
+    public Playlist(int playlistID, String playlistName)
     {
         this.playlistId = playlistID;
         this.playlistName.setValue(playlistName);

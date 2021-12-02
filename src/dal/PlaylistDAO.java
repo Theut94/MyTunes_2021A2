@@ -2,6 +2,8 @@ package dal;
 
 import be.Playlist;
 import be.Song;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.Console;
 import java.io.IOException;
@@ -21,7 +23,65 @@ public class PlaylistDAO {
         DC = new DatabaseConnector();
     }
 
+    //creates a new playlist
+    //@param name
+    //@return Playlist
+    public Playlist createPlaylist(String name) throws Exception
+    {
+        Connection con = DC.getConnection();
 
+        String sql = "INSERT INTO playlistTable VALUES (?);";
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, name);
+        int affectedRows = ps.executeUpdate();
+        if (affectedRows == 1)
+        {
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next())
+            {
+                int id = rs.getInt(1);
+                Playlist playlist = new Playlist(id, name);
+                return playlist;
+            }
+
+        }
+        return null;
+    }
+
+    //returns an ObservableList with playlists from playlist table
+    //@return ObservableList with playlists
+    public ObservableList<Playlist> getAllPlaylist() throws Exception
+    {
+        try (Connection con = DC.getConnection())
+        {
+            String sql = "SELECT * FROM playlistTable;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            // new empty list to hold all playlists
+            ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
+
+            // get all playlists from database and put them in the list of playlists
+            while (rs.next())
+            {
+                int id = rs.getInt("playlistID");
+                String name = rs.getString("playlistName");
+
+                // save the playlist data in a new playlist object
+                Playlist playlist = new Playlist(id, name);
+
+                // get songs in the playlist and put them in the playlists songlist
+                for (Song song : getPlaylist(playlist)) {
+                    playlist.addSongToList(song);
+                }
+
+                // add the complete playlist to the list of playlists
+                allPlaylist.add(playlist);
+            }
+
+            return allPlaylist;
+        }
+    }
 
     //returens a single playlist with its songs
     //@param playlist
@@ -52,7 +112,7 @@ public class PlaylistDAO {
     }
 
 
-    //updates a singel playlist with is new name
+    //updates a single playlist with is new name
     //@param playlist
     public void updatePlaylist(Playlist playlist) throws Exception
     {
@@ -69,7 +129,6 @@ public class PlaylistDAO {
 
         pst.executeUpdate();
         pst.close();
-
     }
 
 
@@ -78,7 +137,8 @@ public class PlaylistDAO {
         Playlist playlist = new Playlist(1,"Power Metal");
         List<Song> songs = DAO.getPlaylist(playlist);
         for (Song s: songs) {
-            System.out.println(s.getName());
+            System.out.println(s.getName() + " : " + s.getArtistName());
         }
+        DAO.createPlaylist("TestPlaylist");
     }
 }

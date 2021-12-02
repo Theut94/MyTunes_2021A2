@@ -23,4 +23,8 @@ public class SongDialogController {
 
     public void save(ActionEvent actionEvent) {
     }
+
+    public void setTxtTitle(String title){
+        txtTitle.setText(title);
+    }
 }

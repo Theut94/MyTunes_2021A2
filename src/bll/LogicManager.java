@@ -61,7 +61,7 @@ public class LogicManager
     public List<Playlist> getAllPlaylists() throws Exception {
         return playlistDAO.getAllPlaylist();
     }
-    public Playlist creatPlaylist(String name) throws Exception
+    public Playlist createPlaylist(String name) throws Exception
     {
        return playlistDAO.createPlaylist(name);
     }

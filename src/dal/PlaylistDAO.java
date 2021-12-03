@@ -90,7 +90,7 @@ public class PlaylistDAO {
         Connection connection = DC.getConnection();
         int p_id = playlist.getPlaylistId();
 
-        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +";";
+        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +";";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);

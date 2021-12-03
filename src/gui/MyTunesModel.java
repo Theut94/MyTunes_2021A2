@@ -13,12 +13,17 @@ import java.util.List;
 public class MyTunesModel
 {
     private ObservableList<Song> songlist;
+    private ObservableList<Playlist> playlistlist;
+    private ObservableList<Song> playlistWithSongs;
     private LogicManager lm;
 
     public MyTunesModel() throws Exception{
         lm = new LogicManager();
         songlist= FXCollections.observableArrayList();
         songlist.addAll(lm.getAllSongs());
+        playlistlist = FXCollections.observableArrayList();
+        playlistlist.addAll(lm.getAllPlaylists());
+        playlistWithSongs = FXCollections.observableArrayList();
     }
 
     public void createSong(String name, String artistName, String filePath, String songLength) throws Exception
@@ -44,8 +49,44 @@ public class MyTunesModel
         lm.updateSong(song);
     }
 
-    public ObservableList<Playlist> getAllPlaylists()
+    public ObservableList<Playlist> getAllPlaylists() throws Exception {
+        return playlistlist;
+    }
+
+    public void createPlaylist (String name) throws Exception
     {
-        return getAllPlaylists();
+        playlistlist.add( lm.createPlaylist(name));
+    }
+
+    public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception
+    {
+        playlistWithSongs.addAll(lm.getPlaylist(playlist));
+        return playlistWithSongs;
+    }
+    public void deletePlaylist (Playlist playlist)
+    {
+        lm.deletePlaylist(playlist);
+    }
+    public void addToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        lm.addToPlaylist(playlist, song);
+        playlistWithSongs.add(song);
+    }
+    public void removeFromPlaylist(Playlist playlist, Song song) throws  Exception
+    {
+        lm.removeFromPlaylist(playlist, song);
+        playlistWithSongs.remove(song);
+    }
+
+    public void clearPlaylist(Playlist playlist) throws Exception
+    {
+        lm.clearPlaylist(playlist);
+        playlistWithSongs.clear();
+    }
+    public void updatePlaylist(Playlist playlist) throws  Exception
+    {
+        lm.updatePlaylist(playlist);
     }
 }
+
+

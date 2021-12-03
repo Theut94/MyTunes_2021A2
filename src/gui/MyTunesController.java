@@ -24,7 +24,7 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Playlist, Integer> tcNumberSongs;
     @FXML
-    private TableColumn<Playlist, Integer> tcPlaylistTime;
+    private TableColumn<Playlist, String> tcPlaylistTime;
     @FXML
     private TableView<Song> tvSongTable;
     @FXML
@@ -115,7 +115,15 @@ public class MyTunesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
 
-
+        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
+        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
+        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
+        try{
+            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Beneath we initialize the songs
         tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
         tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));

@@ -15,7 +15,7 @@ public class Playlist
     private StringProperty playlistName = new SimpleStringProperty();
     private List listOfSongs = new ArrayList();
     private IntegerProperty playlistSongCount;
-    private IntegerProperty playlistTimelength;
+    private StringProperty playlistTimelength = new SimpleStringProperty();
     private int playlistId;
 
     public Playlist(int playlistID, String playlistName)
@@ -51,7 +51,7 @@ public class Playlist
         this.playlistName.set(playlistName);
     }
 
-    public int getPlaylistTimelength() {
+    public String getPlaylistTimelength() {
         return playlistTimelength.get();
     }
 
@@ -71,7 +71,7 @@ public class Playlist
         this.playlistSongCount.set(playlistSongCount);
     }
 
-    public void setPlaylistTimelength(int playlistTimelength) {
+    public void setPlaylistTimelength(String playlistTimelength) {
         this.playlistTimelength.set(playlistTimelength);
     }
 

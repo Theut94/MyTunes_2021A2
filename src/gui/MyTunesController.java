@@ -99,10 +99,10 @@ public class MyTunesController implements Initializable {
     public void search(ActionEvent actionEvent) {
     }
 
-    // needs fixing
+    // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        tvSongTable.;
+        tvSongTable.setItems(myTunesModel.getSonglist());
     }
 }

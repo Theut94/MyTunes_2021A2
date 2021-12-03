@@ -1,5 +1,6 @@
 package bll;
 
+import be.Playlist;
 import be.Song;
 import bll.util.SongSearcher;
 import dal.PlaylistDAO;
@@ -57,4 +58,40 @@ public class LogicManager
      * Methods for PlaylistDAO.
      */
 
+    public List<Playlist> getAllPlaylists() throws Exception {
+        return playlistDAO.getAllPlaylist();
+    }
+    public Playlist creatPlaylist(String name) throws Exception
+    {
+       return playlistDAO.createPlaylist(name);
+    }
+    public List<Song> getPlaylist (Playlist playlist) throws Exception
+    {
+        return playlistDAO.getPlaylist(playlist);
+    }
+
+    public void deletePlaylist(Playlist playlist)
+    {
+        playlistDAO.deletePlaylist(playlist);
+    }
+
+    public void addToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        playlistDAO.addToPlaylist(playlist, song);
+    }
+    public void removeFromPlaylist (Playlist playlist, Song song) throws Exception
+    {
+        playlistDAO.removeFromPlaylist(playlist, song);
+    }
+    public void clearPlaylist(Playlist playlist) throws Exception
+    {
+        playlistDAO.clearPlaylist(playlist);
+    }
+    public void updatePlaylist (Playlist playlist) throws Exception
+    {
+        playlistDAO.updatePlaylist(playlist);
+    }
+
+
 }
+

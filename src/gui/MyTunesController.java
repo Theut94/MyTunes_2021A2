@@ -32,7 +32,7 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Song, String> tcSongArtist;
     @FXML
-    private TableColumn<Song, Integer> tcSongTime;
+    private TableColumn<Song, String> tcSongTime;
     @FXML
     private TextField txtSearchBar;
     @FXML
@@ -96,7 +96,7 @@ public class MyTunesController implements Initializable {
         stage.show();
     }
 
-    public void deleteSong(ActionEvent actionEvent) {
+    public void deleteSong(ActionEvent actionEvent) throws Exception {
         int confirm = SimpleDialog.delete();
         if(confirm == 0 && tvSongTable.getSelectionModel().getSelectedItem() != null)
         {
@@ -118,7 +118,7 @@ public class MyTunesController implements Initializable {
 
         tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-        //tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
+        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
         try{
             tvSongTable.setItems(myTunesModel.getSonglist());
         } catch (Exception e) {

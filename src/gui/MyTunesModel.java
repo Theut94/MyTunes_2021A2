@@ -1,5 +1,6 @@
 package gui;
 
+import be.Playlist;
 import be.Song;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
@@ -34,8 +35,7 @@ public class MyTunesModel
         songlist.clear();
         songlist.addAll(searchedSongs);
     }
-    public void deleteSong(Song song)
-    {
+    public void deleteSong(Song song) throws Exception {
         lm.deleteSong(song);
         songlist.remove(song);
     }
@@ -44,4 +44,8 @@ public class MyTunesModel
         lm.updateSong(song);
     }
 
+    public ObservableList<Playlist> getAllPlaylists()
+    {
+        return getAllPlaylists();
+    }
 }

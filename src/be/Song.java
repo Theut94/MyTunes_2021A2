@@ -12,7 +12,7 @@ public class Song
 {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty artistName = new SimpleStringProperty();
-    private StringProperty songLength;
+    private StringProperty songLength = new SimpleStringProperty();
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 

@@ -91,7 +91,6 @@ public class SongDAO {
 
     public void deleteSong(Song song)
     {
-
         String sql1 = "DELETE WHERE songID = (?) FROM playlistContentTable;";
         String sql2 = "DELETE WHERE songID = (?) FROM songsTable;";
 

@@ -1,5 +1,6 @@
 package be;
 
+import bll.util.ConvertTime;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Playlist
 {
     private StringProperty playlistName = new SimpleStringProperty();
-    private List listOfSongs = new ArrayList();
+    private List<Song> listOfSongs = new ArrayList();
     private IntegerProperty playlistSongCount;
     private StringProperty playlistTimelength = new SimpleStringProperty();
     private int playlistId;
@@ -78,4 +79,30 @@ public class Playlist
     public void setListOfSongs(List listOfSongs) {
         this.listOfSongs = listOfSongs;
     }
+
+    private void updatePlaylistSongCount()
+    {
+        int i = 0;
+        for (Song song: listOfSongs) {
+            if (song != null)
+            {
+                i++;
+            }
+        }
+        this.playlistSongCount.set(i);
+    }
+
+    private void updatePlaylistTimeLength()
+    {
+        List<String> times = new ArrayList<>();
+        for (Song song: listOfSongs) {
+            if (song != null)
+            {
+                times.add(song.getSongLength());
+            }
+        }
+        this.playlistTimelength.set(ConvertTime.sumTime(times));
+    }
+
+    public void updatePlaylist(){ updatePlaylistTimeLength(); updatePlaylistSongCount(); }
 }

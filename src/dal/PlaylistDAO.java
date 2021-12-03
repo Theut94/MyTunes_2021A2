@@ -73,6 +73,7 @@ public class PlaylistDAO {
                 for (Song song : getPlaylist(playlist)) {
                     playlist.addSongToList(song);
                 }
+                playlist.updatePlaylist();
 
                 // add the complete playlist to the list of playlists
                 allPlaylist.add(playlist);

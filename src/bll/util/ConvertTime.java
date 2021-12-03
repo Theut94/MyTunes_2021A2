@@ -91,7 +91,7 @@ public class ConvertTime {
         return total;
     }
 
-    public String sumTime(List<String> times) {
+    public static String sumTime(List<String> times) {
         int i = 0;
         for (String time: times) {
             i += timeToSec(time);

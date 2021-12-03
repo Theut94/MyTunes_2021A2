@@ -26,14 +26,13 @@ public class PlaylistDAO {
     //creates a new playlist
     //@param name
     //@return Playlist
-    public Playlist createPlaylist(int ID, String name) throws Exception
+    public Playlist createPlaylist(String name) throws Exception
     {
         Connection con = DC.getConnection();
 
-        String sql = "INSERT INTO playlistTable VALUES (?,?);";
+        String sql = "INSERT INTO playlistTable (playlistName) VALUES (?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, ID);
-        ps.setString(2, name);
+        ps.setString(1, name);
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 1)
         {
@@ -84,9 +83,9 @@ public class PlaylistDAO {
         }
     }
 
-    //returens a single playlist with its songs
+    //returns a single playlist with its songs
     //@param playlist
-    //@return a List of medias
+    //@return a List of songs
     public List<Song> getPlaylist(Playlist playlist) throws Exception
     {
         Connection con = DC.getConnection();
@@ -112,7 +111,8 @@ public class PlaylistDAO {
         return playlistWithSongs;
     }
 
-    //sletter en playliste
+    //Deletes a playlist
+    //@param playlist
     public void deletePlaylist(Playlist playlist) throws Exception
     {
         Connection con = DC.getConnection();
@@ -133,6 +133,46 @@ public class PlaylistDAO {
 
     }
 
+    //Adds a song to a playlist
+    //@param playlist
+    //@Param song
+    public void addToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+
+        Connection con = DC.getConnection();
+        int pId = playlist.getPlaylistId();
+        int meId = song.getSongId();
+
+        String sql = "insert into playlistContentTable (playlistID , songID) values ((?), (?)); ";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, pId);
+        pst.setInt(2, meId);
+
+        pst.executeUpdate();
+        pst.close();
+
+    }
+
+
+    //removes a song from a single playlist
+    //@param playlist
+    public void clearPlaylist(Playlist playlist) throws Exception
+    {
+        Connection con = DC.getConnection();
+        int pId = playlist.getPlaylistId();
+
+        String sql = "Delete From playlistContentTable where playlistID = (?); ";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, pId);
+
+        pst.executeUpdate();
+        pst.close();
+
+    }
 
     //updates a single playlist with is new name
     //@param playlist
@@ -154,14 +194,13 @@ public class PlaylistDAO {
     }
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         PlaylistDAO DAO = new PlaylistDAO();
-        Playlist playlist = new Playlist(1,"Power Metal");
-        Playlist playlist2 = new Playlist(3,"TestPlaylist");
-        List<Song> songs = DAO.getPlaylist(playlist);
-        //DAO.createPlaylist(DAO.getAllPlaylist().size() + 1,"TestPlaylist");
-        //DAO.createPlaylist(3,"TestPlaylist");
-        DAO.deletePlaylist(playlist2);
+        //Playlist playlist = new Playlist(1,"Power Metal");
+        Playlist playlist2 = new Playlist(1,"TestPlaylist");
+        //List<Song> songs = DAO.getPlaylist(playlist);
+        DAO.createPlaylist(playlist2.getPlaylistName());
+        //DAO.deletePlaylist(playlist2);
         for (Playlist p: DAO.getAllPlaylist() ) {
             System.out.println(p.getPlaylistName());
         }
@@ -169,4 +208,5 @@ public class PlaylistDAO {
         //    System.out.println(s.getName() + " : " + s.getArtistName());
         //}
     }
+
 }

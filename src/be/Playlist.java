@@ -2,6 +2,7 @@ package be;
 
 import bll.util.ConvertTime;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -15,7 +16,7 @@ public class Playlist
 {
     private StringProperty playlistName = new SimpleStringProperty();
     private List<Song> listOfSongs = new ArrayList();
-    private IntegerProperty playlistSongCount;
+    private IntegerProperty playlistSongCount = new SimpleIntegerProperty();
     private StringProperty playlistTimelength = new SimpleStringProperty();
     private int playlistId;
 

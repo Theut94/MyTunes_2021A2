@@ -114,7 +114,7 @@ public class MyTunesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
+        //Beneath we initialize the playlist
         tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
         tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
         tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
@@ -140,5 +140,16 @@ public class MyTunesController implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        // a try to get our songs into the "playlist" view - the thought is to get the selected playlist and have that return
+        //the list of songs - but the issue seems to be that it only runs once - when initialized and doesnt update in real time.
+
+        try{
+            if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
+            {lvPlaylistSongs.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));}
+            lvPlaylistSongs.getItems();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

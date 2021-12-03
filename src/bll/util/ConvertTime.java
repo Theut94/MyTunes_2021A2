@@ -1,5 +1,7 @@
 package bll.util;
 
+import java.util.List;
+
 public class ConvertTime {
 
     public static String secToTime(int sec)
@@ -89,4 +91,11 @@ public class ConvertTime {
         return total;
     }
 
+    public String sumTime(List<String> times) {
+        int i = 0;
+        for (String time: times) {
+            i += timeToSec(time);
+        }
+        return secToTime(i);
+    }
 }

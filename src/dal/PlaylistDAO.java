@@ -2,6 +2,7 @@ package dal;
 
 import be.Playlist;
 import be.Song;
+import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,8 +101,9 @@ public class PlaylistDAO {
             String title = rs.getString("songName");
             String artist = rs.getString("artist");
             String source = rs.getString("filePath");
+            String length = ConvertTime.secToTime(rs.getInt("songLength"));
 
-            Song med = new Song(id, title, artist, source);
+            Song med = new Song(id, title, artist, source, length);
 
             playlistWithSongs.add(med);
 

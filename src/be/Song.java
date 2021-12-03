@@ -16,12 +16,13 @@ public class Song
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 
-    public Song(int songID, String name, String artistName,String filePath)
+    public Song(int songID, String name, String artistName,String filePath,String songLength)
     {
         this.songId.set(songID);
         this.name.set(name);
         this.artistName.set(artistName);
         this.filePath = filePath;
+        this.songLength.set(songLength);
     }
 
     /*

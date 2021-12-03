@@ -20,7 +20,7 @@ public class MyTunesModel
         songlist.addAll(lm.getAllSongs());
     }
 
-    public void createSong(String name, String artistName, String filePath, Integer songLength) throws Exception
+    public void createSong(String name, String artistName, String filePath, String songLength) throws Exception
     {
         songlist.add(lm.createSong(name, artistName, filePath, songLength));
     }

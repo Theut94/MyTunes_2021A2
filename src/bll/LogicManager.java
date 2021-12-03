@@ -26,7 +26,7 @@ public class LogicManager
      *Methods for SongDAO.
      */
     // here we create a song with the input from the gui, sending it to Dal.
-    public Song createSong (String name, String artistName, String filePath, Integer songLength) throws Exception
+    public Song createSong (String name, String artistName, String filePath, String songLength) throws Exception
     {
        return(songDAO.createSong(name, artistName, filePath, songLength));
     }

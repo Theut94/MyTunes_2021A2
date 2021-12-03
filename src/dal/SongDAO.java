@@ -2,6 +2,7 @@ package dal;
 
 import be.Playlist;
 import be.Song;
+import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -28,22 +29,23 @@ public class SongDAO {
     }
 
     public static void main(String[] args) throws Exception {
-        Song song1 = new Song(1,"Let It Go 2 Electric Boogaloo", "Frozen 2: The cooler Frozen","still none");
+        Song song1 = new Song(1,"Let It Go 2 Electric Boogaloo", "Frozen 2: The cooler Frozen","still none","06:94:20");
         SongDAO DAO = new SongDAO();
-        DAO.createSong(song1.getName(),song1.getArtistName(),song1.getFilePath(),1);
-        //System.out.println(SDAO.getAllSongs());
+        DAO.createSong(song1.getName(),song1.getArtistName(),song1.getFilePath(),song1.getSongLength());
+        //System.out.println(DAO.getAllSongs());
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Song createSong(String songName, String artist, String filePath, Integer songLength) throws Exception
+    public Song createSong(String songName, String artist, String filePath, String songLength) throws Exception
     {
         Connection con = DC.getConnection();
 
-        String sql = "INSERT INTO songsTable (songName,artist,filePath) VALUES (?,?,?);";
+        String sql = "INSERT INTO songsTable (songName,artist,filePath,songLength) VALUES (?,?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, songName);
         ps.setString(2, artist);
         ps.setString(3, filePath);
+        ps.setInt(4, ConvertTime.timeToSec(songLength));
 
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 1)
@@ -52,7 +54,7 @@ public class SongDAO {
             if (rs.next())
             {
                 int id = rs.getInt(1);
-                Song song = new Song(id, songName, artist, filePath);
+                Song song = new Song(id, songName, artist, filePath, songLength);
                 return song;
             }
 
@@ -77,8 +79,9 @@ public class SongDAO {
                 String songName = rs.getString("songName");
                 String artistName = rs.getString("artist");
                 String filePath = rs.getString("filePath");
+                String songLength = ConvertTime.secToTime(rs.getInt("songLength"));
 
-                Song song = new Song(songÍD, songName,artistName,filePath);
+                Song song = new Song(songÍD, songName,artistName,filePath,songLength);
                 allSongs.add(song);
             }
 

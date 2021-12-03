@@ -12,10 +12,11 @@ import java.util.List;
 public class SongSearcher {
     public List<Song> SearchSongs(List<Song> searchBase, String searchQuery) throws Exception {
         ArrayList<Song> searchedSongs = new ArrayList<>();
-        for (Song song : searchBase)
-        {
-         if(compareToArtistName(searchQuery, song) || compareToSongName(searchQuery, song))
-             searchedSongs.add(song);
+        for (Song song : searchBase) {
+            if (compareToArtistName(searchQuery, song)
+                    || compareToSongName(searchQuery, song)){
+                searchedSongs.add(song);
+            }
         }
         return searchedSongs;
     }

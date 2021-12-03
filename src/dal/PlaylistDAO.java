@@ -155,8 +155,27 @@ public class PlaylistDAO {
 
     }
 
-
     //removes a song from a single playlist
+    //@param playlist
+    //@param song
+    public void removeFromPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        Connection con = DC.getConnection();
+        int pId = playlist.getPlaylistId();
+        int meId = song.getSongId();
+
+        String sql = "Delete From playlistContentTable where playlistID = (?) and songID=(?); ";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, pId);
+        pst.setInt(2, meId);
+
+        pst.executeUpdate();
+        pst.close();
+    }
+
+    //removes all songs from a single playlist
     //@param playlist
     public void clearPlaylist(Playlist playlist) throws Exception
     {

@@ -12,7 +12,7 @@ public class Song
 {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty artistName = new SimpleStringProperty();
-    private IntegerProperty songLength;
+    private StringProperty songLength;
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 
@@ -48,11 +48,11 @@ public class Song
         this.artistName.set(artistName);
     }
 
-    public int getSongLength() {
+    public String getSongLength() {
         return songLength.get();
     }
 
-    public void setSongLength(int songLength) {
+    public void setSongLength(String songLength) {
         this.songLength.set(songLength);
     }
 }

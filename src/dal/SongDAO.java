@@ -123,7 +123,7 @@ public class SongDAO
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, song.getName());
             statement.setString(2, song.getArtistName());
-            statement.setInt(3,song.getSongLength());
+            statement.setString(3,song.getSongLength());
             statement.setInt(4,song.getSongId());
             statement.executeUpdate();
         } catch (SQLException throwables) {

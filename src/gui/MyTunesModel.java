@@ -2,12 +2,8 @@ package gui;
 
 import be.Song;
 import bll.LogicManager;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**

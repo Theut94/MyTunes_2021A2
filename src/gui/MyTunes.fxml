@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesController">
    <children>
       <ListView fx:id="lvPlaylistSongs" layoutX="246.0" layoutY="92.0" prefHeight="382.0" prefWidth="243.0" />
       <Label layoutX="38.0" layoutY="75.0" text="Playlists" />
@@ -28,9 +28,8 @@
             <TableColumn fx:id="tcSongTime" prefWidth="75.0" text="Time" />
          </columns>
       </TableView>
-      <TextField fx:id="txtSearchBar" layoutX="689.0" layoutY="34.0" prefHeight="25.0" prefWidth="106.0" />
-      <Label layoutX="648.0" layoutY="38.0" text="Filter:" />
-      <Button layoutX="820.0" layoutY="34.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" text="search" />
+      <TextField fx:id="txtSearchBar" layoutX="709.0" layoutY="34.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="675.0" layoutY="38.0" text="Filter:" />
       <Label fx:id="lblNowPlaying" layoutX="336.0" layoutY="14.0" text="Something is playing">
          <font>
             <Font size="15.0" />

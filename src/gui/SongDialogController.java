@@ -3,10 +3,15 @@ package gui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 
+/**
+ * Handles the Song dialog window
+ */
 public class SongDialogController {
 
     @FXML
@@ -23,9 +28,11 @@ public class SongDialogController {
     public SongDialogController() throws Exception {
         myTunesModel = new MyTunesModel();
 
-
     }
 
+    /**
+     * Handles the file chooser
+     */
     public void choosePath(ActionEvent actionEvent) {
         // TODO: Open window to pick file
         JFileChooser jFileChooser = new JFileChooser();
@@ -38,8 +45,12 @@ public class SongDialogController {
             txtPath.setText(jFileChooser.getSelectedFile().getPath());
     }
 
+    /**
+     * Closes the Song window when the Cancel button is clicked
+     */
     public void cancel(ActionEvent actionEvent)
     {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 
     //Mangler if statement der kan determinere om vi vil lave en ny sang eller redigere en sang

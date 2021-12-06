@@ -84,6 +84,7 @@ public class MyTunesController implements Initializable {
         }
     }
 
+
     public void newSong(ActionEvent actionEvent) throws IOException {
         createSongDialog("New Song");
     }
@@ -101,16 +102,11 @@ public class MyTunesController implements Initializable {
 
     }
 
-    public void search(ActionEvent actionEvent)
-    {
-
-    }
-
     // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        //Beneath we initialize the playlist
+        //Initializes the playlist
         tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
         tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
         tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
@@ -119,7 +115,7 @@ public class MyTunesController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Beneath we initialize the songs
+        //Initializes the songs
         tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
         tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
@@ -149,6 +145,10 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    /**
+     * Opens the Song Dialog Window
+     * @param windowTitle
+     */
     public void createSongDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));

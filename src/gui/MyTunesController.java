@@ -138,8 +138,8 @@ public class MyTunesController implements Initializable {
 
         try{
             if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
-            {lvPlaylistSongs.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));}
-            lvPlaylistSongs.getItems();
+            {lvPlaylistSongs.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
+            lvPlaylistSongs.getItems();}
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -159,4 +159,21 @@ public class MyTunesController implements Initializable {
         stage.show();
     }
 
+    public void playPause(ActionEvent actionEvent)
+    {
+        if(myTunesModel.isPlaying() == true)
+        {
+            myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
+            lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());
+        }
+        else
+            myTunesModel.stopPlaying();
+    }
+
+    public void previousSong(ActionEvent actionEvent) {
+    }
+
+    public void nextSong(ActionEvent actionEvent)
+    {
+    }
 }

@@ -28,6 +28,21 @@ public class MyTunesModel
         playlistWithSongs = FXCollections.observableArrayList();
     }
 
+    public void playSong(Song song)
+    {
+        lm.playSong(song);
+
+    }
+    public void stopPlaying()
+    {
+        lm.stopPlaying();
+    }
+
+    public boolean isPlaying()
+    {
+        return lm.isPlaying();
+    }
+
     public void createSong(String name, String artistName, String filePath, String songLength) throws Exception
     {
         songlist.add(lm.createSong(name, artistName, filePath, songLength));

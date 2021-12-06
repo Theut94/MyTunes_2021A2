@@ -2,6 +2,7 @@ package bll;
 
 import be.Playlist;
 import be.Song;
+import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
 import dal.PlaylistDAO;
 import dal.SongDAO;
@@ -18,9 +19,29 @@ public class LogicManager
     SongDAO songDAO = new SongDAO();
     PlaylistDAO playlistDAO = new PlaylistDAO();
     SongSearcher songSearcher = new SongSearcher();
+    MusicPlayer mp;
 
     public LogicManager() throws IOException
     {
+
+    }
+
+    /**
+     * Methods for playing Songs
+     */
+    public void playSong(Song song)
+    {
+      mp.playSong(song.getFilePath());
+
+
+    }
+    public void stopPlaying()
+    {
+        mp.stopPlaying();
+    }
+    public boolean isPlaying()
+    {
+        return mp.isPlaying();
     }
 
     /**

@@ -15,10 +15,6 @@ public class MusicPlayer
 
     public MusicPlayer()
     {
-
-
-
-
     }
 
     public void playSong(String file)

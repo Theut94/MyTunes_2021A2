@@ -23,7 +23,7 @@ public class LogicManager
 
     public LogicManager() throws IOException
     {
-
+        mp = new MusicPlayer();
     }
 
     /**

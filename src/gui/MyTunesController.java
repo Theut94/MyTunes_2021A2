@@ -164,10 +164,13 @@ public class MyTunesController implements Initializable {
         if(myTunesModel.isPlaying() != true)
         {
             if(lvPlaylistSongs.getSelectionModel().getSelectedItem() != null)
-            {myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
-            lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());}
+            {
+                myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
+                lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());
+            }
             else if (tvSongTable.getSelectionModel().getSelectedItem()!= null)
             {
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
                 lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
             }

@@ -77,23 +77,11 @@ public class MyTunesController implements Initializable {
     }
 
     public void newSong(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("New Song");
-        stage.setScene(scene);
-        stage.show();
+        createSongDialog("New Song");
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle("Edit Song");
-        stage.setScene(scene);
-        stage.show();
+        createSongDialog("Edit Song");
     }
 
     public void deleteSong(ActionEvent actionEvent) throws Exception {
@@ -152,4 +140,15 @@ public class MyTunesController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void createSongDialog(String windowTitle) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setTitle(windowTitle);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

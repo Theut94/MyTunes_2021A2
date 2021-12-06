@@ -8,11 +8,10 @@ public class SimpleDialog {
     public SimpleDialog(){f = new JFrame();}
 
     public static int delete(){
-        int input = JOptionPane.showConfirmDialog(null,
-                "Are you sure you want to delete?", "Delete...?",JOptionPane.OK_CANCEL_OPTION
-        , JOptionPane.WARNING_MESSAGE);
 
-        return input;
+        return JOptionPane.showConfirmDialog(null,
+               "Are you sure you want to delete?", "Delete...?",JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE);
     }
 
     public static String playlist(){

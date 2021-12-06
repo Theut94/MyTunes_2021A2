@@ -5,6 +5,8 @@ import be.Song;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -86,6 +88,10 @@ public class MyTunesModel
     public void updatePlaylist(Playlist playlist) throws  Exception
     {
         lm.updatePlaylist(playlist);
+    }
+    public void swapSongsInPlaylist(int i, int j) throws Exception {
+        Collections.swap(playlistWithSongs, i, j);
+        //bll.swapSongsInPlaylist(selectedPlaylist.getValue().getId(), playlistWithSongs.get(i).getId(), playlistWithSongs.get(j).getId()); // todo
     }
 }
 

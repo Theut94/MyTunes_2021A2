@@ -62,11 +62,19 @@ public class MyTunesController implements Initializable {
         int confirm = SimpleDialog.delete();
     }
 
-    public void positionUp(ActionEvent actionEvent) {
+    public void positionUp(ActionEvent actionEvent) throws Exception  {
+        changeOrderInPlaylist(-1);
     }
 
-    public void positionDown(ActionEvent actionEvent) {
+    public void positionDown(ActionEvent actionEvent) throws Exception  {
+        changeOrderInPlaylist(+1);
     }
+
+    private void changeOrderInPlaylist(int upOrDown) throws Exception {
+        myTunesModel.swapSongsInPlaylist(lvPlaylistSongs.getSelectionModel().getSelectedIndex(),
+                lvPlaylistSongs.getSelectionModel().getSelectedIndex() + upOrDown);
+    }
+
     //Method to delete a song from a playlist når der er lavet
     public void removeFromPlaylist(ActionEvent actionEvent) {
         int confirm = SimpleDialog.delete();

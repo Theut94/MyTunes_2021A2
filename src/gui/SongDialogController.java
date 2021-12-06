@@ -25,9 +25,9 @@ public class SongDialogController {
 
     private MyTunesModel myTunesModel;
 
-    public SongDialogController() throws Exception {
+    public SongDialogController() throws Exception
+    {
         myTunesModel = new MyTunesModel();
-
     }
 
     /**

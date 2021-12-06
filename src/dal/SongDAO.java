@@ -1,20 +1,15 @@
 package dal;
 
-import be.Playlist;
+
 import be.Song;
 import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is where we access data for all songs.
@@ -35,6 +30,11 @@ public class SongDAO {
         //System.out.println(DAO.getAllSongs());
     }
 
+    public String filePathToURI(String filePath)
+    {
+        return "file:" + filePath.replace("\\", "/");
+    }
+
     // This is the method to create a song in the Database. This is also where the song gets an ID.
     public Song createSong(String songName, String artist, String filePath, String songLength) throws Exception
     {
@@ -44,7 +44,7 @@ public class SongDAO {
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, songName);
         ps.setString(2, artist);
-        ps.setString(3, filePath);
+        ps.setString(3, filePathToURI(filePath));
         ps.setInt(4, ConvertTime.timeToSec(songLength));
 
         int affectedRows = ps.executeUpdate();

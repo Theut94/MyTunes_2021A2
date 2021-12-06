@@ -125,6 +125,7 @@ public class MyTunesController implements Initializable {
             e.printStackTrace();
         }
 
+        //Search function
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{
                 myTunesModel.searchSongs(newValue);

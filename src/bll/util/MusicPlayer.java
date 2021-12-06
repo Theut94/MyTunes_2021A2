@@ -1,6 +1,6 @@
 package bll.util;
 
-import be.Song;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -16,7 +16,7 @@ public class MusicPlayer
     public MusicPlayer()
     {
     }
-
+    //We update the media
     public void playSong(String file)
     {
         media = new Media(file);
@@ -24,14 +24,17 @@ public class MusicPlayer
         mp.play();
         isPlaying = true;
     }
+
     public  void stopPlaying()
     {
         mp.stop();
         isPlaying = false;
     }
+
     public void nextSong()
     {
     }
+
     public boolean isPlaying()
     {
         return isPlaying;

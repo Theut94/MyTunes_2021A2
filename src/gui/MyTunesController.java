@@ -161,10 +161,17 @@ public class MyTunesController implements Initializable {
 
     public void playPause(ActionEvent actionEvent)
     {
-        if(myTunesModel.isPlaying() == true)
+        if(myTunesModel.isPlaying() != true)
         {
-            myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
-            lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());
+            if(lvPlaylistSongs.getSelectionModel().getSelectedItem() != null)
+            {myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
+            lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());}
+            else if (tvSongTable.getSelectionModel().getSelectedItem()!= null)
+            {
+                myTunesModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+            }
+
         }
         else
             myTunesModel.stopPlaying();

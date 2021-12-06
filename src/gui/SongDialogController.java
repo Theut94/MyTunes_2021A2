@@ -2,9 +2,13 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.TextField;
 
+import javax.swing.*;
+
 public class SongDialogController {
+
     @FXML
     private TextField txtTitle;
     @FXML
@@ -18,10 +22,20 @@ public class SongDialogController {
 
     public SongDialogController() throws Exception {
         myTunesModel = new MyTunesModel();
+
+
     }
 
     public void choosePath(ActionEvent actionEvent) {
         // TODO: Open window to pick file
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setCurrentDirectory(new java.io.File("."));
+        jFileChooser.setDialogTitle("Chose a Song");
+        jFileChooser.setFileSelectionMode(jFileChooser.FILES_ONLY);
+        jFileChooser.setAcceptAllFileFilterUsed(false);
+
+        if (jFileChooser.showOpenDialog(null) == jFileChooser.APPROVE_OPTION)
+            txtPath.setText(jFileChooser.getSelectedFile().getPath());
     }
 
     public void cancel(ActionEvent actionEvent)

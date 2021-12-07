@@ -114,13 +114,13 @@ public class SongDAO {
     public void updateSong(Song song)
     {
 
-        String sql = "UPDATE songsTable SET songName= (?), artist=(?), time=(?) WHERE songID = (?);";
+        String sql = "UPDATE songsTable SET songName= (?), artist=(?), songLength=(?) WHERE songID = (?);";
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, song.getName());
             statement.setString(2, song.getArtistName());
-            statement.setString(3,song.getSongLength());
+            statement.setInt(3,ConvertTime.timeToSec(song.getSongLength()));
             statement.setInt(4,song.getSongId());
             statement.executeUpdate();
 

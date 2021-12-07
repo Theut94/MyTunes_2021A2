@@ -97,7 +97,7 @@ public class SongDialogController implements Initializable {
     public void save(ActionEvent actionEvent) throws Exception {
 
         if(!edit) {
-
+            System.out.println("test");
             myTunesModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
         }
         else{

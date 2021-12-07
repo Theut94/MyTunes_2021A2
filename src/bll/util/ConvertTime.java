@@ -22,7 +22,7 @@ public class ConvertTime {
             minutes++;
             sec -= 60;
         }
-        while (sec >= 0)
+        while (sec > 0)
         {
             seconds++;
             sec -= 1;
@@ -71,7 +71,7 @@ public class ConvertTime {
             minutes++;
             sec -= 60;
         }
-        while (sec >= 0)
+        while (sec > 0)
         {
             seconds++;
             sec -= 1;
@@ -118,7 +118,7 @@ public class ConvertTime {
             count--;
         } catch (Exception e)
         {
-            System.out.println("No seconds");
+            //System.out.println("No seconds");
         }
         try
         {
@@ -126,7 +126,7 @@ public class ConvertTime {
             count--;
         } catch (Exception e)
         {
-            System.out.println("No minutes");
+            //System.out.println("No minutes");
         }
         try
         {
@@ -134,7 +134,7 @@ public class ConvertTime {
             count--;
         } catch (Exception e)
         {
-            System.out.println("No hours");
+            //System.out.println("No hours");
         }
 
         return total;

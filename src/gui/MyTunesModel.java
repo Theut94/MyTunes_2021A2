@@ -75,7 +75,9 @@ public class MyTunesModel
 
     public void createPlaylist (String name) throws Exception
     {
-        playlistlist.add( lm.createPlaylist(name));
+        lm.createPlaylist(name);
+        playlistlist.clear();
+        playlistlist.addAll(lm.getAllPlaylists());
     }
 
     public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception
@@ -85,6 +87,7 @@ public class MyTunesModel
     }
     public void deletePlaylist (Playlist playlist)
     {
+        playlistlist.remove(playlist);
         lm.deletePlaylist(playlist);
     }
     public void addToPlaylist(Playlist playlist, Song song) throws Exception
@@ -106,6 +109,8 @@ public class MyTunesModel
     public void updatePlaylist(Playlist playlist) throws  Exception
     {
         lm.updatePlaylist(playlist);
+        playlistlist.clear();
+        playlistlist.addAll(lm.getAllPlaylists());
     }
     public void swapSongsInPlaylist(int i, int j) throws Exception {
         Collections.swap(playlistWithSongs, i, j);

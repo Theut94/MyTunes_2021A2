@@ -76,6 +76,7 @@ public class MyTunesController implements Initializable {
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
             myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
+        tvPlaylists.refresh();
     }
 
     public void positionUp(ActionEvent actionEvent) throws Exception  {

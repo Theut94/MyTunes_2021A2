@@ -66,8 +66,7 @@ public class MyTunesController implements Initializable {
     }
 
     public void deletePlaylist(ActionEvent actionEvent) {
-        int confirm = SimpleDialog.delete();
-        if(confirm == 0 )
+        if(SimpleDialog.delete())
             myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
     }
 
@@ -86,8 +85,7 @@ public class MyTunesController implements Initializable {
 
     //Method to delete a song from a playlist når der er lavet
     public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
-        int confirm = SimpleDialog.delete();
-        if(confirm == 0)
+        if(SimpleDialog.delete())
         {
          myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem() ,lvPlaylistSongs.getSelectionModel().getSelectedItem());
         }
@@ -110,8 +108,7 @@ public class MyTunesController implements Initializable {
     }
 
     public void deleteSong(ActionEvent actionEvent) throws Exception {
-        int confirm = SimpleDialog.delete();
-        if(confirm == 0 && tvSongTable.getSelectionModel().getSelectedItem() != null)
+        if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null)
         {
             myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }

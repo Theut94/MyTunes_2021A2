@@ -40,7 +40,10 @@ public class MyTunesController implements Initializable {
     @FXML
     private ListView<Song> lvPlaylistSongs;
 
+
     private MyTunesModel myTunesModel;
+
+
 
     public MyTunesController() throws Exception {
 
@@ -92,11 +95,15 @@ public class MyTunesController implements Initializable {
 
 
     public void newSong(ActionEvent actionEvent) throws IOException {
-        createSongDialog("New Song");
+        SongDialogController controller = createSongDialog("New Song");
+
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
-        createSongDialog("Edit Song");
+        SongDialogController controller = createSongDialog("Edit Song");
+        Song song = tvSongTable.getSelectionModel().getSelectedItem();
+        controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), song.getFilePath());
+
     }
 
     public void deleteSong(ActionEvent actionEvent) throws Exception {
@@ -156,7 +163,7 @@ public class MyTunesController implements Initializable {
      * Opens the Song Dialog Window
      * @param windowTitle
      */
-    public void createSongDialog(String windowTitle) throws IOException {
+    public SongDialogController createSongDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -164,6 +171,7 @@ public class MyTunesController implements Initializable {
         stage.setTitle(windowTitle);
         stage.setScene(scene);
         stage.show();
+        return fxmlLoader.getController();
     }
 
     public void playPause(ActionEvent actionEvent)

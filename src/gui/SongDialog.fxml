@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="257.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SongDialogController">
+<AnchorPane prefHeight="257.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SongDialogController">
    <children>
       <GridPane layoutX="11.0" layoutY="14.0" prefHeight="198.0" prefWidth="372.0">
         <columnConstraints>

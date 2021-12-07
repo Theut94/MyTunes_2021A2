@@ -1,9 +1,14 @@
 package gui;
 
+
 import bll.util.ConvertTime;
+
+import be.Song;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
@@ -13,10 +18,15 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+import javax.swing.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+
 /**
  * Handles the Song dialog window
  */
-public class SongDialogController {
+public class SongDialogController implements Initializable {
 
     @FXML
     private TextField txtTitle;
@@ -27,11 +37,17 @@ public class SongDialogController {
     @FXML
     private TextField txtPath;
 
+    private int songID;
+    private boolean edit;
     private MyTunesModel myTunesModel;
+
+
 
     public SongDialogController() throws Exception
     {
         myTunesModel = new MyTunesModel();
+        edit = false;
+        songID = 0;
     }
 
     /**
@@ -78,16 +94,36 @@ public class SongDialogController {
     }
 
     //Mangler if statement der kan determinere om vi vil lave en ny sang eller redigere en sang
-    public void save(ActionEvent actionEvent)
-    {
+    public void save(ActionEvent actionEvent) throws Exception {
 
-        /*if()
-        {
-            myTunesModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), Integer.parseInt(txtTime.getText());
-        }*/
+        if(!edit) {
+            myTunesModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+        }
+        else{
+            Song song = new Song(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(),txtTime.getText());
+            myTunesModel.updateSong(song);
+        }
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 
-    public void setTxtTitle(String title){
+    public void setSongValues(int id, String title, String artist, String time, String path){
         txtTitle.setText(title);
+        txtArtist.setText(artist);
+        txtTime.setText(time);
+        txtPath.setText(path);
+        songID = id;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        txtTitle.setText("");
+        txtArtist.setText("");
+        txtPath.setText("");
+        txtTime.setText("");
+
+    }
+
+    public void setEdit(boolean edit){
+        this.edit=edit;
     }
 }

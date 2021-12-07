@@ -22,10 +22,10 @@ public class ConvertTime {
             minutes++;
             sec -= 60;
         }
-        while (sec >= 1)
+        while (sec >= 0)
         {
-            seconds = sec;
-            sec = 0;
+            seconds++;
+            sec -= 1;
         }
 
         if (hours == 0)

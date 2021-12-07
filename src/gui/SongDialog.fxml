@@ -30,8 +30,8 @@
             <Label text="FilePath: " GridPane.rowIndex="3" />
             <TextField fx:id="txtTitle" GridPane.columnIndex="2" />
             <TextField fx:id="txtArtist" layoutX="91.0" layoutY="22.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="txtTime" layoutX="91.0" layoutY="72.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="txtPath" layoutX="91.0" layoutY="120.0" prefHeight="26.0" prefWidth="191.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="txtTime" layoutX="91.0" layoutY="72.0" promptText="min:sec" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPath" editable="false" focusTraversable="false" layoutX="91.0" layoutY="120.0" prefHeight="26.0" prefWidth="191.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Button mnemonicParsing="false" onAction="#choosePath" text="Choose..." GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
       </GridPane>

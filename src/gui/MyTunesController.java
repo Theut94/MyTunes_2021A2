@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -101,7 +102,7 @@ public class MyTunesController implements Initializable {
     }
 
 
-    public void newSong(ActionEvent actionEvent) throws IOException {
+    public void newSong(ActionEvent actionEvent) throws IOException, InterruptedException {
         SongDialogController controller = createSongDialog("New Song");
 
 
@@ -211,5 +212,5 @@ public class MyTunesController implements Initializable {
 
     public void nextSong(ActionEvent actionEvent) {
     }
-
+    
 }

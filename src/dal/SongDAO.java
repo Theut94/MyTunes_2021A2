@@ -32,7 +32,7 @@ public class SongDAO {
 
     public String filePathToURI(String filePath)
     {
-        return "file:" + filePath.replace("\\", "/");
+        return "file:/" + filePath.replace("\\", "/");
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.

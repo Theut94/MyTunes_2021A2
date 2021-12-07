@@ -46,20 +46,26 @@ public class MyTunesController implements Initializable {
 
         myTunesModel = new MyTunesModel();
     }
-    public void addToPlaylist(ActionEvent actionEvent) {
+    public void addToPlaylist(ActionEvent actionEvent) throws Exception {
+        myTunesModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
 
     }
 
-    public void newPlaylist(ActionEvent actionEvent) {
+    public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
+        myTunesModel.createPlaylist(name);
     }
 
-    public void updatePlaylist(ActionEvent actionEvent) {
+    public void updatePlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
+        Playlist pl = new Playlist(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
+        myTunesModel.updatePlaylist(pl);
     }
 
     public void deletePlaylist(ActionEvent actionEvent) {
         int confirm = SimpleDialog.delete();
+        if(confirm == 0 )
+            myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
     }
 
     public void positionUp(ActionEvent actionEvent) throws Exception  {
@@ -76,11 +82,11 @@ public class MyTunesController implements Initializable {
     }
 
     //Method to delete a song from a playlist når der er lavet
-    public void removeFromPlaylist(ActionEvent actionEvent) {
+    public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
         int confirm = SimpleDialog.delete();
         if(confirm == 0)
         {
-        // myTunesModel.deleteSongFromPlaylist(lvPlaylistSongs.getSelectionModel().getSelectedItem());
+         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem() ,lvPlaylistSongs.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -184,7 +190,7 @@ public class MyTunesController implements Initializable {
     public void previousSong(ActionEvent actionEvent) {
     }
 
-    public void nextSong(ActionEvent actionEvent)
-    {
+    public void nextSong(ActionEvent actionEvent) {
     }
+
 }

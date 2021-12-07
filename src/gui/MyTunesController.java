@@ -102,7 +102,8 @@ public class MyTunesController implements Initializable {
     public void editSong(ActionEvent actionEvent) throws IOException {
         SongDialogController controller = createSongDialog("Edit Song");
         Song song = tvSongTable.getSelectionModel().getSelectedItem();
-        controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), song.getFilePath());
+        String filepath = song.getFilePath().replace("file:/", "");
+        controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
 
     }
 

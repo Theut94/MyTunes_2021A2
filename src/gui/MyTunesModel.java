@@ -6,6 +6,7 @@ import bll.LogicManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,9 +62,11 @@ public class MyTunesModel
         lm.deleteSong(song);
         songlist.remove(song);
     }
-    public void updateSong(Song song)
-    {
+    public void updateSong(Song song) throws SQLException {
         lm.updateSong(song);
+        songlist.clear();
+        songlist.addAll(lm.getAllSongs());
+
     }
 
     public ObservableList<Playlist> getAllPlaylists() throws Exception {

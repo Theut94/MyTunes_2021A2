@@ -51,6 +51,7 @@ public class MyTunesController implements Initializable {
     }
     public void addToPlaylist(ActionEvent actionEvent) throws Exception {
         myTunesModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
+        refreshViews();
 
     }
 
@@ -65,6 +66,12 @@ public class MyTunesController implements Initializable {
         myTunesModel.updatePlaylist(pl);
     }
 
+    public void refreshViews()
+    {
+        tvSongTable.refresh();
+        tvPlaylists.refresh();
+        lvPlaylistSongs.refresh();
+    }
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
             myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
@@ -72,6 +79,7 @@ public class MyTunesController implements Initializable {
 
     public void positionUp(ActionEvent actionEvent) throws Exception  {
         changeOrderInPlaylist(-1);
+
     }
 
     public void positionDown(ActionEvent actionEvent) throws Exception  {
@@ -81,6 +89,7 @@ public class MyTunesController implements Initializable {
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
         myTunesModel.swapSongsInPlaylist(lvPlaylistSongs.getSelectionModel().getSelectedIndex(),
                 lvPlaylistSongs.getSelectionModel().getSelectedIndex() + upOrDown);
+        refreshViews();
     }
 
     //Method to delete a song from a playlist når der er lavet
@@ -94,6 +103,7 @@ public class MyTunesController implements Initializable {
 
     public void newSong(ActionEvent actionEvent) throws IOException {
         SongDialogController controller = createSongDialog("New Song");
+
 
     }
 
@@ -112,6 +122,7 @@ public class MyTunesController implements Initializable {
         {
             myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }
+
 
     }
 

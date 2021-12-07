@@ -91,8 +91,8 @@ public class SongDAO {
 
     public void deleteSong(Song song)
     {
-        String sql1 = "DELETE WHERE songID = (?) FROM playlistContentTable;";
-        String sql2 = "DELETE WHERE songID = (?) FROM songsTable;";
+        String sql1 = "DELETE FROM playlistContentTable WHERE songID = (?);";
+        String sql2 = "DELETE FROM songsTable WHERE songID = (?);";
 
         try(Connection connection = DC.getConnection())
         {
@@ -114,14 +114,15 @@ public class SongDAO {
     public void updateSong(Song song)
     {
 
-        String sql = "UPDATE songsTable SET songName= (?), artist=(?), songLength=(?) WHERE songID = (?);";
+        String sql = "UPDATE songsTable SET songName= (?), artist=(?), songLength=(?), filePath=(?) WHERE songID = (?);";
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, song.getName());
             statement.setString(2, song.getArtistName());
             statement.setInt(3,ConvertTime.timeToSec(song.getSongLength()));
-            statement.setInt(4,song.getSongId());
+            statement.setString(4, filePathToURI(song.getFilePath()));
+            statement.setInt(5,song.getSongId());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {

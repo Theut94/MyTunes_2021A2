@@ -53,6 +53,55 @@ public class ConvertTime {
 
         return time;
     }
+    public static String doubleSecToTime(double sec)
+    {
+
+        int hours = 0;
+        int minutes = 0;
+        int seconds = 0;
+        String time;
+
+        while (sec >= 3600)
+        {
+            hours++;
+            sec -= 3600;
+        }
+        while (sec >= 60)
+        {
+            minutes++;
+            sec -= 60;
+        }
+        while (sec >= 0)
+        {
+            seconds++;
+            sec -= 1;
+        }
+
+        if (hours == 0)
+        {
+            time = minutes + ":" + seconds;
+
+            if (seconds < 10)
+            {
+                time = minutes + ":" + "0" + seconds;
+            }
+        } else
+        {
+            time = hours + ":" + minutes + ":" + seconds;
+            if (minutes < 10 && seconds < 10)
+            {
+                time = hours + ":" + "0" + minutes + ":" + "0" + seconds;
+            } else if (minutes < 10)
+            {
+                time = hours + ":" + "0" + minutes + ":" + seconds;
+            } else if (seconds < 10)
+            {
+                time = hours + ":" + minutes + ":" + "0" + seconds;
+            }
+        }
+
+        return time;
+    }
 
     public static int timeToSec(String time)
     {

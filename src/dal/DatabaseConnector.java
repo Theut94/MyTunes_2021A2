@@ -31,8 +31,8 @@ public class DatabaseConnector {
 
 
     public static void main(String[] args)  throws Exception{
-        DatabaseConnector DA = new DatabaseConnector();
-        DA.getConnection();
+
+
     }
 
 }

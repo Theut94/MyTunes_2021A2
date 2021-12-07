@@ -110,12 +110,14 @@ public class MyTunesController implements Initializable {
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
-        SongDialogController controller = createSongDialog("Edit Song");
-        Song song = tvSongTable.getSelectionModel().getSelectedItem();
+        if(lvPlaylistSongs.getSelectionModel().getSelectedItem() != null) {
+            SongDialogController controller = createSongDialog("Edit Song");
+            Song song = tvSongTable.getSelectionModel().getSelectedItem();
 
-        String filepath = song.getFilePath().replace("file:/", "");
-        controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
-        controller.setEdit(true);
+            String filepath = song.getFilePath().replace("file:/", "");
+            controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
+            controller.setEdit(true);
+        }
 
     }
 
@@ -213,5 +215,5 @@ public class MyTunesController implements Initializable {
 
     public void nextSong(ActionEvent actionEvent) {
     }
-    
+
 }

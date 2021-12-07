@@ -103,7 +103,7 @@ public class MyTunesController implements Initializable {
         SongDialogController controller = createSongDialog("Edit Song");
         Song song = tvSongTable.getSelectionModel().getSelectedItem();
         controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), song.getFilePath());
-
+        controller.setEdit(true);
     }
 
     public void deleteSong(ActionEvent actionEvent) throws Exception {

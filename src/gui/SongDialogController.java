@@ -1,13 +1,17 @@
 package gui;
 
+import bll.util.ConvertTime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+import java.io.File;
 
 /**
  * Handles the Song dialog window
@@ -34,15 +38,35 @@ public class SongDialogController {
      * Handles the file chooser
      */
     public void choosePath(ActionEvent actionEvent) {
-        // TODO: Open window to pick file
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setCurrentDirectory(new java.io.File("."));
-        jFileChooser.setDialogTitle("Chose a Song");
-        jFileChooser.setFileSelectionMode(jFileChooser.FILES_ONLY);
-        jFileChooser.setAcceptAllFileFilterUsed(false);
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new java.io.File("."));
+        fc.setTitle("Choose a song");
 
-        if (jFileChooser.showOpenDialog(null) == jFileChooser.APPROVE_OPTION)
-            txtPath.setText(jFileChooser.getSelectedFile().getPath());
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Musik filer","*.mp3", "*.wav"));
+        File selectedFile = fc.showOpenDialog(null);
+        if(selectedFile != null)
+        {
+            txtPath.setText(selectedFile.getName());
+            setTxtTime(selectedFile.getPath());
+        }
+    }
+
+    public void setTxtTime(String file)
+    {
+
+        String fileString = "file:/" + file.replace("\\", "/");
+        System.out.println(fileString);
+        Media media = new Media(fileString);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnReady(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(mediaPlayer.getMedia().getDuration().toSeconds());
+                txtTime.setText( ConvertTime.doubleSecToTime(mediaPlayer.getMedia().getDuration().toSeconds()));
+            }
+        });
+
+
     }
 
     /**

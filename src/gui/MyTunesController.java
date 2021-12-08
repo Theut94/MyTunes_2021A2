@@ -20,6 +20,10 @@ import java.util.ResourceBundle;
 
 public class MyTunesController implements Initializable {
     @FXML
+    private TableView<Song> tvPlaylistSongTable;
+    @FXML
+    private TableColumn<Song,String> tcPlaylistSongs;
+    @FXML
     private TableView<Playlist> tvPlaylists;
     @FXML
     private TableColumn<Playlist, String> tcPlaylistName;
@@ -39,8 +43,6 @@ public class MyTunesController implements Initializable {
     private TextField txtSearchBar;
     @FXML
     private Label lblNowPlaying;
-    @FXML
-    private ListView<Song> lvPlaylistSongs;
 
 
     private MyTunesModel myTunesModel;
@@ -57,6 +59,7 @@ public class MyTunesController implements Initializable {
         refreshViews();
 
     }
+
 
     public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
@@ -75,7 +78,7 @@ public class MyTunesController implements Initializable {
     {
         tvSongTable.refresh();
         tvPlaylists.refresh();
-        lvPlaylistSongs.refresh();
+        tvPlaylistSongTable.refresh();
     }
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
@@ -93,8 +96,8 @@ public class MyTunesController implements Initializable {
     }
 
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
-        myTunesModel.swapSongsInPlaylist(lvPlaylistSongs.getSelectionModel().getSelectedIndex(),
-                lvPlaylistSongs.getSelectionModel().getSelectedIndex() + upOrDown);
+        myTunesModel.swapSongsInPlaylist(tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
+                tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
         refreshViews();
     }
 
@@ -102,7 +105,7 @@ public class MyTunesController implements Initializable {
     public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete())
         {
-         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem() ,lvPlaylistSongs.getSelectionModel().getSelectedItem());
+         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem() ,tvPlaylistSongTable.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -169,13 +172,7 @@ public class MyTunesController implements Initializable {
         // a try to get our songs into the "playlist" view - the thought is to get the selected playlist and have that return
         //the list of songs - but the issue seems to be that it only runs once - when initialized and doesnt update in real time.
 
-        try{
-            if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
-            {lvPlaylistSongs.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
-            lvPlaylistSongs.getItems();}
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     private void setTvSongTable() {
@@ -210,10 +207,10 @@ public class MyTunesController implements Initializable {
     {
         if(myTunesModel.isPlaying() != true)
         {
-            if(lvPlaylistSongs.getSelectionModel().getSelectedItem() != null)
+            if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
-                myTunesModel.playSong(lvPlaylistSongs.getSelectionModel().getSelectedItem());
-                lblNowPlaying.setText(lvPlaylistSongs.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
             }
             else if (tvSongTable.getSelectionModel().getSelectedItem()!= null)
             {
@@ -223,8 +220,12 @@ public class MyTunesController implements Initializable {
             }
 
         }
-        else
+        else if(myTunesModel.isPlaying() == true)
             myTunesModel.stopPlaying();
+       // else
+           // tvPlaylistSongTable.getSelectionModel().select(1);
+            //myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+
     }
 
     public void previousSong(ActionEvent actionEvent) {
@@ -235,5 +236,17 @@ public class MyTunesController implements Initializable {
         myTunesModel.nextSong();
     }
 
-
+    //Shows the list of songs from a playlist in the Listview.
+    public void showPlaylist(MouseEvent mouseEvent)
+    {
+        tvPlaylistSongTable.getItems().clear();
+        try{
+        if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
+        {tvPlaylistSongTable.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
+            tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+            tvPlaylistSongTable.getItems();}
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
 }

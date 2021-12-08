@@ -213,7 +213,9 @@ public class MyTunesController implements Initializable {
     public void previousSong(ActionEvent actionEvent) {
     }
 
-    public void nextSong(ActionEvent actionEvent) {
+    public void nextSong(ActionEvent actionEvent)
+    {
+        myTunesModel.nextSong();
     }
 
 }

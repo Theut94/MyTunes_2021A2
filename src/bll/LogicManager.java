@@ -44,6 +44,11 @@ public class LogicManager
         return mp.isPlaying();
     }
 
+    public void nextSong()
+    {
+        mp.nextSong();
+    }
+
     /**
      *Methods for SongDAO.
      */

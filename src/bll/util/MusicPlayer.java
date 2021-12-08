@@ -15,16 +15,17 @@ public class MusicPlayer
     private boolean isPlaying = false;
     private Duration timeWhenPaused;
     private boolean hasBeenPaused;
+    private Media oldMedia;
 
     public MusicPlayer()
     {
     }
-    //We update the media
+    //We update the media and play the file.
     public void playSong(String file)
     {
         media = new Media(file);
         mp = new MediaPlayer(media);
-       if(!hasBeenPaused)
+       if(!hasBeenPaused || !oldMedia.getSource().equals(media.getSource()))
        {mp.play();
         mp.setAutoPlay(true);
         isPlaying = true;
@@ -35,19 +36,20 @@ public class MusicPlayer
            hasBeenPaused = false;
            isPlaying = true;
        }
-
-
     }
 
+    // we pause and save the duration we are at.
     public  void stopPlaying()
     {
         timeWhenPaused= mp.getCurrentTime();
+        oldMedia = mp.getMedia();
         mp.pause();
         isPlaying = false;
         hasBeenPaused = true;
 
     }
 
+    //we set the the timer to the end
     public void nextSong()
     {
         mp.setOnEndOfMedia(null);

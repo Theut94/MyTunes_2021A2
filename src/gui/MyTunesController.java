@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class MyTunesController implements Initializable {
 
 
     private MyTunesModel myTunesModel;
+    private SongDialogController songController;
 
 
 
@@ -106,19 +108,22 @@ public class MyTunesController implements Initializable {
 
 
     public void newSong(ActionEvent actionEvent) throws IOException, InterruptedException {
-        SongDialogController controller = createSongDialog("New Song");
-
-
+        Stage stage = createSongDialog("New Song");
+        Stage parentStage = ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow()));
+        stage.initOwner(parentStage);
+        stage.showAndWait();
     }
 
-    public void editSong(ActionEvent actionEvent) throws IOException {
+    public void editSong(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(tvSongTable.getSelectionModel().getSelectedItem() != null) {
-            SongDialogController controller = createSongDialog("Edit Song");
+            Stage stage = createSongDialog("Edit Song");
+            Stage parentStage = ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow()));
+            stage.initOwner(parentStage);
             Song song = tvSongTable.getSelectionModel().getSelectedItem();
-
             String filepath = song.getFilePath().replace("file:/", "");
-            controller.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
-            controller.setEdit(true);
+            songController.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
+            songController.setEdit(true);
+            stage.showAndWait();
         }
 
     }
@@ -180,15 +185,16 @@ public class MyTunesController implements Initializable {
      * Opens the Song Dialog Window
      * @param windowTitle
      */
-    public SongDialogController createSongDialog(String windowTitle) throws IOException {
+    public Stage createSongDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setTitle(windowTitle);
         stage.setScene(scene);
-        stage.show();
-        return fxmlLoader.getController();
+        stage.initModality(Modality.WINDOW_MODAL);
+        songController = fxmlLoader.getController();
+        return stage;
     }
 
     public void playPause(ActionEvent actionEvent)

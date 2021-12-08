@@ -62,9 +62,11 @@ public class MyTunesController implements Initializable {
     }
 
     public void updatePlaylist(ActionEvent actionEvent) throws Exception {
-        String name = SimpleDialog.playlist();
-        Playlist pl = new Playlist(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
-        myTunesModel.updatePlaylist(pl);
+        if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
+            String name = SimpleDialog.playlist();
+            Playlist pl = new Playlist(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
+            myTunesModel.updatePlaylist(pl);
+        }
     }
 
     public void refreshViews()
@@ -110,7 +112,7 @@ public class MyTunesController implements Initializable {
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
-        if(lvPlaylistSongs.getSelectionModel().getSelectedItem() != null) {
+        if(tvSongTable.getSelectionModel().getSelectedItem() != null) {
             SongDialogController controller = createSongDialog("Edit Song");
             Song song = tvSongTable.getSelectionModel().getSelectedItem();
 

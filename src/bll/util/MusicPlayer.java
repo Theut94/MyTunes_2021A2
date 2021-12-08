@@ -20,17 +20,21 @@ public class MusicPlayer
     public MusicPlayer()
     {
     }
+
     //We update the media and play the file.
     public void playSong(String file)
     {
         media = new Media(file);
         mp = new MediaPlayer(media);
        if(!hasBeenPaused || !oldMedia.getSource().equals(media.getSource()))
-       {mp.play();
-        mp.setAutoPlay(true);
-        isPlaying = true;
-       hasBeenPaused = false;}
-      else {
+       {
+           mp.play();
+           mp.setAutoPlay(true);
+           isPlaying = true;
+           hasBeenPaused = false;
+       }
+
+       else {
            mp.setStartTime(timeWhenPaused);
            mp.play();
            hasBeenPaused = false;

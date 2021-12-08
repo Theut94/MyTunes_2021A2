@@ -132,19 +132,23 @@ public class MyTunesController implements Initializable {
 
     }
 
+    public void setTvSongTable() {
+        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
+        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
+        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
+        try {
+            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         //Initializes the playlist
-        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
-        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
-        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
-        try{
-            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setTvSongTable();
         //Initializes the songs
         tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));

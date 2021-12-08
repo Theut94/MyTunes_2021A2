@@ -202,6 +202,7 @@ public class MyTunesController implements Initializable {
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         songController = fxmlLoader.getController();
+        songController.setModel(myTunesModel);
         return stage;
     }
 
@@ -233,5 +234,6 @@ public class MyTunesController implements Initializable {
     {
         myTunesModel.nextSong();
     }
+
 
 }

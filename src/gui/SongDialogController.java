@@ -118,6 +118,9 @@ public class SongDialogController implements Initializable {
         txtPath.setText(path);
         songID = id;
     }
+    public void setModel(MyTunesModel model){
+        myTunesModel = model;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

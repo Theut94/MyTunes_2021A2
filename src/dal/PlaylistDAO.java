@@ -219,17 +219,58 @@ public class PlaylistDAO {
 
     public static void main(String[] args) throws Exception {
         PlaylistDAO DAO = new PlaylistDAO();
-        //Playlist playlist = new Playlist(1,"Power Metal");
-        Playlist playlist2 = new Playlist(1,"TestPlaylist");
-        //List<Song> songs = DAO.getPlaylist(playlist);
-        DAO.createPlaylist(playlist2.getPlaylistName());
-        //DAO.deletePlaylist(playlist2);
-        for (Playlist p: DAO.getAllPlaylist() ) {
-            System.out.println(p.getPlaylistName());
+
+        if (true == false) //Set to true to (re)create new tables in a database
+        {
+            DAO.createPlaylistTable();
+            DAO.createPlaylistContentTable();
+            DAO.createSongsTable();
         }
-        //for (Song s: songs) {
-        //    System.out.println(s.getName() + " : " + s.getArtistName());
-        //}
+    }
+
+    //creates a new playlistTable
+    public void createPlaylistTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DROP TABLE playlistTable" +
+                "CREATE TABLE playlistTable (" +
+                "playlistID int IDENTITY(1,1) PRIMARY KEY," +
+                "playlistName varchar(255)" +
+                ");";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //creates a new playlistContentTable
+    public void createPlaylistContentTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DROP TABLE playlistContentTable" +
+                "CREATE TABLE playlistContentTable (" +
+                "playlistID int," +
+                "playlistName varchar(255)" +
+                ");";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //creates a new songsTable
+    public void createSongsTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DROP TABLE songsTable" +
+                "CREATE TABLE songsTable(" +
+                "songID int IDENTITY(1,1) NOT NULL," +
+                "songName varchar(255)," +
+                "artist varchar(255)," +
+                "filePath varchar(255)," +
+                "songLength int" +
+                ");";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
     }
 
 }

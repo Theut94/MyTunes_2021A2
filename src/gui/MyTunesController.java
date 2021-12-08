@@ -137,7 +137,7 @@ public class MyTunesController implements Initializable {
 
     }
 
-    public void setTvSongTable() {
+    public void setTcPlaylistTable() {
         tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
         tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
         tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
@@ -152,17 +152,10 @@ public class MyTunesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        //Initializes the playlist
-        setTvSongTable();
         //Initializes the songs
-        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
-        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
-        try{
-            tvSongTable.setItems(myTunesModel.getSonglist());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setTvSongTable();
+        //Initializes the playlists
+        setTcPlaylistTable();
 
         //Search function
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -180,6 +173,17 @@ public class MyTunesController implements Initializable {
             if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
             {lvPlaylistSongs.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
             lvPlaylistSongs.getItems();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setTvSongTable() {
+        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
+        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
+        try{
+            tvSongTable.setItems(myTunesModel.getSonglist());
         } catch (Exception e) {
             e.printStackTrace();
         }

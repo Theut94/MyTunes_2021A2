@@ -23,13 +23,6 @@ public class SongDAO {
         DC = new DatabaseConnector();
     }
 
-    public static void main(String[] args) throws Exception {
-        Song song1 = new Song(1,"Let It Go 2 Electric Boogaloo", "Frozen 2: The cooler Frozen","still none","06:94:20");
-        SongDAO DAO = new SongDAO();
-        DAO.createSong(song1.getName(),song1.getArtistName(),song1.getFilePath(),song1.getSongLength());
-        //System.out.println(DAO.getAllSongs());
-    }
-
     public String filePathToURI(String filePath)
     {
         return "file:/" + filePath.replace("\\", "/");

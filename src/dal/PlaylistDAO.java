@@ -220,12 +220,46 @@ public class PlaylistDAO {
     public static void main(String[] args) throws Exception {
         PlaylistDAO DAO = new PlaylistDAO();
 
-        if (true == false) //Set to true to (re)create new tables in a database
+        if (true == false) //Set to true to run
         {
-            DAO.createPlaylistTable();
-            DAO.createPlaylistContentTable();
-            DAO.createSongsTable();
+            //DAO.createPlaylistTable();
+            //DAO.createPlaylistContentTable();
+            //DAO.createSongsTable();
+
+            //DAO.clearPlaylistTable();
+            //DAO.clearPlaylistContentTable();
+            //DAO.clearSongsTable();
         }
+    }
+
+    //clears playlistTable
+    public void clearPlaylistTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DELETE FROM playlistTable";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //clears playlistContentTable
+    public void clearPlaylistContentTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DELETE FROM playlistContentTable";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //clears songsTable
+    public void clearSongsTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DELETE FROM songsTable";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
     }
 
     //creates a new playlistTable

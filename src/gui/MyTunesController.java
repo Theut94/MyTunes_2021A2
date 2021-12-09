@@ -133,7 +133,7 @@ public class MyTunesController implements Initializable {
     // it also checks if there is no song selected from the songtable and tries to play the start of a playlist.
     public void playPause(ActionEvent actionEvent)
     {
-        if(myTunesModel.isPlaying() != true)
+        if(!myTunesModel.isPlaying())
         {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
@@ -148,7 +148,7 @@ public class MyTunesController implements Initializable {
             }
 
         }
-        else if(myTunesModel.isPlaying() == true)
+        else if(myTunesModel.isPlaying())
             myTunesModel.stopPlaying();
         else if (tvSongTable.getSelectionModel().getSelectedItem() == null && tvPlaylistSongTable.getItems() != null)
         {

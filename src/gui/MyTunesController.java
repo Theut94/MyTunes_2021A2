@@ -129,9 +129,11 @@ public class MyTunesController implements Initializable {
             myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }
     }
+    // Plays or pauses a song - it detects both if the musicplayer is playing or if it is paused
+    // it also checks if there is no song selected from the songtable and tries to play the start of a playlist.
     public void playPause(ActionEvent actionEvent)
     {
-        if(!myTunesModel.isPlaying())
+        if(myTunesModel.isPlaying() != true)
         {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
@@ -142,24 +144,84 @@ public class MyTunesController implements Initializable {
             {
                 lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+
             }
 
         }
-        else if(myTunesModel.isPlaying())
+        else if(myTunesModel.isPlaying() == true)
             myTunesModel.stopPlaying();
-        // else
-        // tvPlaylistSongTable.getSelectionModel().select(1);
-        //myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+        else if (tvSongTable.getSelectionModel().getSelectedItem() == null && tvPlaylistSongTable.getItems() != null)
+        {
+            System.out.println("test");
+            tvPlaylistSongTable.getSelectionModel().select(1);
+            myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+        }
+
+    }
+    //gets the previous song from the playlist or songtable
+    public void previousSong(ActionEvent actionEvent)
+    {
+        if(tvSongTable.getSelectionModel().getSelectedItem() == null) {
+            if (tvPlaylistSongTable.getSelectionModel().getSelectedIndex() == 0) {
+                tvPlaylistSongTable.getSelectionModel().selectLast();
+                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+            } else {
+                tvPlaylistSongTable.getSelectionModel().selectPrevious();
+                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.previousSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+            }
+        }
+        else
+        {
+            if(tvSongTable.getSelectionModel().getSelectedIndex() == 0)
+            {
+                tvSongTable.getSelectionModel().selectLast();
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());}
+            else
+            {
+                tvSongTable.getSelectionModel().selectPrevious();
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());
+            }
+        }
 
     }
 
-    public void previousSong(ActionEvent actionEvent) {
-    }
-
+    //gets the next song from the playlist or song table
     public void nextSong(ActionEvent actionEvent)
     {
-        myTunesModel.nextSong();
+        if(tvSongTable.getSelectionModel().getSelectedItem() == null)
+        {
+            if(tvPlaylistSongTable.getSelectionModel().getSelectedIndex()+1 == tvPlaylistSongTable.getItems().size())
+            {
+                tvPlaylistSongTable.getSelectionModel().selectFirst();
+                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+            }
+            else
+            {
+                tvPlaylistSongTable.getSelectionModel().selectNext();
+                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+            }
+        }
+        else
+        {
+            if(tvSongTable.getSelectionModel().getSelectedIndex()+1 == tvSongTable.getItems().size())
+            {
+                tvSongTable.getSelectionModel().selectFirst();
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+            }
+            else
+            {
+                tvSongTable.getSelectionModel().selectNext();
+                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+            }
+        }
     }
 
     //Shows the list of songs from a playlist in the Listview.
@@ -228,5 +290,14 @@ public class MyTunesController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearSongTableSelection(MouseEvent mouseEvent) {
+        tvSongTable.getSelectionModel().clearSelection();
+    }
+
+    public void clearPlaylistSongTable(MouseEvent mouseEvent) {
+
+        tvPlaylistSongTable.getSelectionModel().clearSelection();
     }
 }

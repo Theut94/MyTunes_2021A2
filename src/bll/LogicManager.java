@@ -44,9 +44,13 @@ public class LogicManager
         return mp.isPlaying();
     }
 
-    public void nextSong()
+    public void nextSong(Song song)
     {
-        mp.nextSong();
+        mp.nextSong(song.getFilePath());
+    }
+    public void previousSong(Song song)
+    {
+        mp.previousSong(song.getFilePath());
     }
 
     /**

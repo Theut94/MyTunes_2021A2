@@ -24,17 +24,24 @@ public class MusicPlayer
     //We update the media and play the file.
     public void playSong(String file)
     {
-        media = new Media(file);
-        mp = new MediaPlayer(media);
+        try{
+            media = new Media(file);
+            mp = new MediaPlayer(media);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
        if(!hasBeenPaused || !oldMedia.getSource().equals(media.getSource()))
        {
            mp.play();
            mp.setAutoPlay(true);
            isPlaying = true;
            hasBeenPaused = false;
+
        }
 
-       else {
+       else
+       {
            mp.setStartTime(timeWhenPaused);
            mp.play();
            hasBeenPaused = false;
@@ -53,10 +60,23 @@ public class MusicPlayer
 
     }
 
-    //we set the the timer to the end
-    public void nextSong()
+    //we get the song after the on we are listening to, and reset the mediaplayer with this song.
+    // mp = null; because the garbage collector will clean up the old mp.
+    public void nextSong(String nextSongFile)
     {
-        mp.setOnEndOfMedia(null);
+        mp.pause();
+        mp = null;
+        isPlaying = false;
+        playSong(nextSongFile);
+    }
+
+    //we get the song prior to the on we are listening to, and reset the mediaplayer with this song.
+    public void previousSong(String previousSongFile)
+    {
+        mp.pause();
+        mp = null;
+        isPlaying = false;
+        playSong(previousSongFile);
     }
 
     public boolean isPlaying()

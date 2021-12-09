@@ -43,7 +43,12 @@ public class MyTunesModel
     {
         return lm.isPlaying();
     }
-    public void nextSong(){lm.nextSong();}
+    public void nextSong(Song song){lm.nextSong(song);}
+
+    public void previousSong( Song song)
+    {
+        lm.previousSong(song);
+    }
 
     public void createSong(String name, String artistName, String filePath, String songLength) throws Exception
     {

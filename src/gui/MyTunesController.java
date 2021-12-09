@@ -49,17 +49,14 @@ public class MyTunesController implements Initializable {
     private SongDialogController songController;
 
 
-
     public MyTunesController() throws Exception {
-
         myTunesModel = new MyTunesModel();
+
     }
+
     public void addToPlaylist(ActionEvent actionEvent) throws Exception {
         myTunesModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
-        refreshViews();
-
     }
-
 
     public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
@@ -74,12 +71,6 @@ public class MyTunesController implements Initializable {
         }
     }
 
-    public void refreshViews()
-    {
-        tvSongTable.refresh();
-        tvPlaylists.refresh();
-        tvPlaylistSongTable.refresh();
-    }
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
             myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
@@ -88,7 +79,6 @@ public class MyTunesController implements Initializable {
 
     public void positionUp(ActionEvent actionEvent) throws Exception  {
         changeOrderInPlaylist(-1);
-
     }
 
     public void positionDown(ActionEvent actionEvent) throws Exception  {
@@ -98,7 +88,6 @@ public class MyTunesController implements Initializable {
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
         myTunesModel.swapSongsInPlaylist(tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
-        refreshViews();
     }
 
     //Method to delete a song from a playlist når der er lavet
@@ -109,103 +98,40 @@ public class MyTunesController implements Initializable {
         }
     }
 
-
+    /**
+     * Opens a new Song Dialog window
+     */
     public void newSong(ActionEvent actionEvent) throws IOException, InterruptedException {
         Stage stage = createSongDialog("New Song");
-        Stage parentStage = ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow()));
-        stage.initOwner(parentStage);
+        Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
+        stage.initOwner(mainStage);
         stage.showAndWait();
     }
 
+    /**
+     * Opens a new Song Dialog window with the current info of the selected song already in the text fields
+     */
     public void editSong(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(tvSongTable.getSelectionModel().getSelectedItem() != null) {
             Stage stage = createSongDialog("Edit Song");
-            Stage parentStage = ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow()));
-            stage.initOwner(parentStage);
+            Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
+            stage.initOwner(mainStage);
+
             Song song = tvSongTable.getSelectionModel().getSelectedItem();
             String filepath = song.getFilePath().replace("file:/", "");
             songController.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
-            songController.setEdit(true);
             stage.showAndWait();
         }
-
     }
 
     public void deleteSong(ActionEvent actionEvent) throws Exception {
-        if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null)
-        {
+        if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null) {
             myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }
-
-
     }
-
-    public void setTcPlaylistTable() {
-        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
-        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
-        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
-        try {
-            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
-        //Initializes the songs
-        setTvSongTable();
-        //Initializes the playlists
-        setTcPlaylistTable();
-
-        //Search function
-        txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            try{
-                myTunesModel.searchSongs(newValue);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        // a try to get our songs into the "playlist" view - the thought is to get the selected playlist and have that return
-        //the list of songs - but the issue seems to be that it only runs once - when initialized and doesnt update in real time.
-
-
-    }
-
-    private void setTvSongTable() {
-        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
-        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
-        try{
-            tvSongTable.setItems(myTunesModel.getSonglist());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Opens the Song Dialog Window
-     * @param windowTitle
-     */
-    public Stage createSongDialog(String windowTitle) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setTitle(windowTitle);
-        stage.setScene(scene);
-        stage.initModality(Modality.WINDOW_MODAL);
-        songController = fxmlLoader.getController();
-        songController.setModel(myTunesModel);
-        return stage;
-    }
-
     public void playPause(ActionEvent actionEvent)
     {
-        if(myTunesModel.isPlaying() != true)
+        if(!myTunesModel.isPlaying())
         {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
@@ -220,11 +146,11 @@ public class MyTunesController implements Initializable {
             }
 
         }
-        else if(myTunesModel.isPlaying() == true)
+        else if(myTunesModel.isPlaying())
             myTunesModel.stopPlaying();
-       // else
-           // tvPlaylistSongTable.getSelectionModel().select(1);
-            //myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+        // else
+        // tvPlaylistSongTable.getSelectionModel().select(1);
+        //myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
 
     }
 
@@ -237,16 +163,70 @@ public class MyTunesController implements Initializable {
     }
 
     //Shows the list of songs from a playlist in the Listview.
-    public void showPlaylist(MouseEvent mouseEvent)
-    {
+    public void showPlaylist(MouseEvent mouseEvent) {
         tvPlaylistSongTable.getItems().clear();
         try{
-        if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
-        {tvPlaylistSongTable.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
-            tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-            tvPlaylistSongTable.getItems();}
-    } catch (Exception e) {
-        e.printStackTrace();
+            if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
+            {tvPlaylistSongTable.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
+                tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+                tvPlaylistSongTable.getItems();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * Creates the Song Dialog window for New song and Edit song
+     */
+    public Stage createSongDialog(String windowTitle) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("SongDialog.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(windowTitle);
+        stage.initModality(Modality.WINDOW_MODAL);
+        songController = fxmlLoader.getController();
+        songController.setModel(myTunesModel);
+        return stage;
+    }
+
+    // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //Initializes the songs and playlists
+        setTvSongTable();
+        setTcPlaylistTable();
+
+        //Search function
+        txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            try{
+                myTunesModel.searchSongs(newValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setTcPlaylistTable() {
+        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
+        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
+        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
+        try {
+            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setTvSongTable() {
+        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
+        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
+        try{
+            tvSongTable.setItems(myTunesModel.getSonglist());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

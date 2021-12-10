@@ -87,7 +87,7 @@ public class MyTunesController implements Initializable {
     }
 
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
-        myTunesModel.swapSongsInPlaylist(tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
+        myTunesModel.swapSongsInPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
     }
 
@@ -95,7 +95,9 @@ public class MyTunesController implements Initializable {
     public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete())
         {
-         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem() ,tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),
+                 tvPlaylistSongTable.getSelectionModel().getSelectedItem(),
+                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex());
         }
     }
 

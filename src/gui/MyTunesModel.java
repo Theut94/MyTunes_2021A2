@@ -103,9 +103,9 @@ public class MyTunesModel
         playlistWithSongs.add(song);
         updatePlaylist(playlist);
     }
-    public void removeFromPlaylist(Playlist playlist, Song song) throws  Exception
+    public void removeFromPlaylist(Playlist playlist, Song song, int i) throws  Exception
     {
-        lm.removeFromPlaylist(playlist, song);
+        lm.removeFromPlaylist(playlist, i);
         playlistWithSongs.remove(song);
         updatePlaylist(playlist);
     }
@@ -121,9 +121,9 @@ public class MyTunesModel
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
-    public void swapSongsInPlaylist(int i, int j) throws Exception {
+    public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception {
         Collections.swap(playlistWithSongs, i, j);
-        //bll.swapSongsInPlaylist(selectedPlaylist.getValue().getId(), playlistWithSongs.get(i).getId(), playlistWithSongs.get(j).getId()); // todo
+        lm.swapSongsInPlaylist(playlist, i, j);
     }
     public void timer(TimerTask t)
     {

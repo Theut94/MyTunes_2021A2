@@ -91,7 +91,7 @@ public class PlaylistDAO {
         Connection connection = DC.getConnection();
         int p_id = playlist.getPlaylistId();
 
-        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength, pc.placement FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +";";
+        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength, pc.placement FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +" ORDER BY placement;";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
@@ -165,12 +165,11 @@ public class PlaylistDAO {
     //removes a song from a single playlist
     //@param playlist
     //@param song
-    public void removeFromPlaylist(Playlist playlist, Song song) throws Exception
+    public void removeFromPlaylist(Playlist playlist, int i) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
-        int meId = song.getSongId();
-        int index = playlist.getListOfSongs().indexOf(song);
+        int index = i;
         System.out.println(index);
 
         String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND placement=(?); ";
@@ -198,6 +197,40 @@ public class PlaylistDAO {
         pst.setInt(1, pId);
 
         pst.executeUpdate();
+
+    }
+
+    //moves a song in a single playlist
+    //@param playlist
+    //@param song
+    public void moveSongsInPlaylist(Playlist playlist, int i, int j) throws Exception
+    {
+        Connection connection = DC.getConnection();
+        int pId = playlist.getPlaylistId();
+        int index1 = i;
+        int index2 = j;
+
+        String sql1 = "Update playlistContentTable SET placement = -1 WHERE playlistID = (?) AND placement=(?); ";
+        String sql2 = "Update playlistContentTable SET placement = (?) WHERE playlistID = (?) AND placement=(?); ";
+        String sql3 = "Update playlistContentTable SET placement = (?) WHERE playlistID = (?) AND placement=-1; ";
+
+        PreparedStatement pst1 = connection.prepareStatement(sql1);
+        PreparedStatement pst2 = connection.prepareStatement(sql2);
+        PreparedStatement pst3 = connection.prepareStatement(sql3);
+
+        pst1.setInt(1, pId);
+        pst1.setInt(2, index2);
+
+        pst2.setInt(1, index2);
+        pst2.setInt(2, pId);
+        pst2.setInt(3, index1);
+
+        pst3.setInt(1, index1);
+        pst3.setInt(2, pId);
+
+        pst1.executeUpdate();
+        pst2.executeUpdate();
+        pst3.executeUpdate();
 
     }
 

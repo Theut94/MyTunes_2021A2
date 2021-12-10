@@ -6,6 +6,7 @@ import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
 import dal.PlaylistDAO;
 import dal.SongDAO;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -121,9 +122,9 @@ public class LogicManager
     {
         playlistDAO.addToPlaylist(playlist, song);
     }
-    public void removeFromPlaylist (Playlist playlist, Song song) throws Exception
+    public void removeFromPlaylist (Playlist playlist, int i) throws Exception
     {
-        playlistDAO.removeFromPlaylist(playlist, song);
+        playlistDAO.removeFromPlaylist(playlist, i);
     }
     public void clearPlaylist(Playlist playlist) throws Exception
     {
@@ -133,7 +134,9 @@ public class LogicManager
     {
         playlistDAO.updatePlaylist(playlist);
     }
-
-
+    public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception
+    {
+        playlistDAO.moveSongsInPlaylist(playlist, i, j);
+    }
 }
 

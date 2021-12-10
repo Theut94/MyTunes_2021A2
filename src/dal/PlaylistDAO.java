@@ -91,7 +91,7 @@ public class PlaylistDAO {
         Connection connection = DC.getConnection();
         int p_id = playlist.getPlaylistId();
 
-        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +";";
+        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength, pc.placement FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +";";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
@@ -103,10 +103,11 @@ public class PlaylistDAO {
             String artist = rs.getString("artist");
             String source = rs.getString("filePath");
             String length = ConvertTime.secToTime(rs.getInt("songLength"));
+            int index = rs.getInt("placement");
 
             Song med = new Song(id, title, artist, source, length);
 
-            playlistWithSongs.add(med);
+            playlistWithSongs.add(index,med);
 
         }
         return playlistWithSongs;
@@ -147,13 +148,15 @@ public class PlaylistDAO {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
         int meId = song.getSongId();
+        int index = playlist.getPlaylistSongCount();
 
-        String sql = "INSERT INTO playlistContentTable (playlistID , songID) VALUES ((?), (?)); ";
+        String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
         pst.setInt(1, pId);
         pst.setInt(2, meId);
+        pst.setInt(3, index);
 
         pst.executeUpdate();
 
@@ -167,13 +170,14 @@ public class PlaylistDAO {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
         int meId = song.getSongId();
+        int index = playlist.getListOfSongs().indexOf(song);
 
-        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND songID=(?); ";
+        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND playlist=(?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
         pst.setInt(1, pId);
-        pst.setInt(2, meId);
+        pst.setInt(2, index);
 
         pst.executeUpdate();
 
@@ -219,10 +223,10 @@ public class PlaylistDAO {
     public static void main(String[] args) throws Exception {
         PlaylistDAO DAO = new PlaylistDAO();
 
-        if (true == false) //Set to true to run
+        if (true == true) //Set to true to run
         {
             //DAO.createPlaylistTable();
-            //DAO.createPlaylistContentTable();
+            DAO.createPlaylistContentTable();
             //DAO.createSongsTable();
 
             //DAO.clearPlaylistTable();
@@ -280,7 +284,7 @@ public class PlaylistDAO {
     {
         Connection connection = DC.getConnection();
         String sql1 = "DROP TABLE playlistContentTable";
-        String sql2 = "CREATE TABLE playlistContentTable ( ContentID int IDENTITY(1,1) NOT NULL, playlistID int, songID int );";
+        String sql2 = "CREATE TABLE playlistContentTable ( playlistID int, songID int, placement int );";
         PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
         ps1.executeUpdate();
         PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);

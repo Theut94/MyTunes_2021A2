@@ -40,19 +40,12 @@ public class Playlist
     {
         listOfSongs.add(song);
     }
-    public void removeSong(Song song)
-    {
-        listOfSongs.remove(song);
-    }
 
     public String getPlaylistName() {
         return playlistName.get();
     }
 
-    public void setPlaylistName(String playlistName) {
-        this.playlistName.set(playlistName);
-    }
-
+    //is being used by a PropertyValueFactory in MTC.
     public String getPlaylistTimelength() {
         return playlistTimelength.get();
     }
@@ -63,22 +56,6 @@ public class Playlist
 
     public int getPlaylistId() {
         return playlistId;
-    }
-
-    public void setPlaylistId(int playlistId) {
-        this.playlistId = playlistId;
-    }
-
-    public void setPlaylistSongCount(int playlistSongCount) {
-        this.playlistSongCount.set(playlistSongCount);
-    }
-
-    public void setPlaylistTimelength(String playlistTimelength) {
-        this.playlistTimelength.set(playlistTimelength);
-    }
-
-    public void setListOfSongs(List listOfSongs) {
-        this.listOfSongs = listOfSongs;
     }
 
     private void updatePlaylistSongCount()

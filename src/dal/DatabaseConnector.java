@@ -12,6 +12,7 @@ public class DatabaseConnector {
 
     private SQLServerDataSource dataSource;
 
+    //Here we access the Database we've been using - we have been so kind to send the txt.document with the program so you can access it aswell :-)
     public DatabaseConnector() throws IOException
     {
         Properties props = new Properties();

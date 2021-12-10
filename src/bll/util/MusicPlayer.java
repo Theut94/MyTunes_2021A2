@@ -97,6 +97,7 @@ public class MusicPlayer
         return isPlaying;
     }
 
+    //this method tells us how long the current song has been playing.
     public TimerTask setElapsedTime()
     {
         TimerTask t = new TimerTask()
@@ -110,6 +111,8 @@ public class MusicPlayer
         };
         return t;
     }
+
+    //this method calculates the remaining time of the song currently playing.
     public TimerTask setTimeRemaning()
     {
         TimerTask t= new TimerTask() {
@@ -128,6 +131,8 @@ public class MusicPlayer
     {
         isSongFinished=b;
     }
+
+    //checks if the song is finished. be aware it starts a new thread.
     public TimerTask isSongFinishedTask() {
 
         TimerTask t = new TimerTask() {
@@ -142,10 +147,14 @@ public class MusicPlayer
 
         return t;
     }
+
     public boolean isSongFinished()
     {
         return isSongFinished;
     }
+
+    //timer that gives updates the current time of the song every second.
+    //The timer also checks every 3.rd second if the song is finished, if so the TimerTask t will get the next song and play it.
     public void timer(TimerTask t)
     {
         timer.scheduleAtFixedRate(setElapsedTime(), 1000,1000);

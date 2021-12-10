@@ -144,7 +144,6 @@ public class PlaylistDAO {
     //@Param song
     public void addToPlaylist(Playlist playlist, Song song) throws Exception
     {
-
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
         int meId = song.getSongId();
@@ -280,14 +279,12 @@ public class PlaylistDAO {
     public void createPlaylistContentTable() throws Exception
     {
         Connection connection = DC.getConnection();
-
-        String sql = "DROP TABLE playlistContentTable" +
-                "CREATE TABLE playlistContentTable (" +
-                "playlistID int," +
-                "playlistName varchar(255)" +
-                ");";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.executeUpdate();
+        String sql1 = "DROP TABLE playlistContentTable";
+        String sql2 = "CREATE TABLE playlistContentTable ( ContentID int IDENTITY(1,1) NOT NULL, playlistID int, songID int );";
+        PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+        ps1.executeUpdate();
+        PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+        ps2.executeUpdate();
     }
 
     //creates a new songsTable

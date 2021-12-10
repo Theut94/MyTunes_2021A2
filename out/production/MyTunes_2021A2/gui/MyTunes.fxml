@@ -28,11 +28,6 @@
       </TableView>
       <TextField fx:id="txtSearchBar" layoutX="709.0" layoutY="34.0" prefHeight="26.0" prefWidth="150.0" />
       <Label layoutX="675.0" layoutY="38.0" text="Filter:" />
-      <Label fx:id="lblNowPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="23.0" text="No song is playing" textAlignment="CENTER">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
       <Label layoutX="246.0" layoutY="75.0" text="Songs on Playlist" />
       <Label layoutX="507.0" layoutY="75.0" text="Songs" />
       <Button layoutX="507.0" layoutY="485.0" mnemonicParsing="false" onAction="#addToPlaylist" prefHeight="26.0" text="Add To Playlist" />
@@ -66,5 +61,6 @@
             <TableColumn fx:id="tcPlaylistSongs" prefWidth="258.0" text="Title" />
          </columns>
       </TableView>
+      <TextField fx:id="lblNowPlaying" editable="false" layoutX="340.0" layoutY="22.0" promptText="No song is playing." />
    </children>
 </AnchorPane>

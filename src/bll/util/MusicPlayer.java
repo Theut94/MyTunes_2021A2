@@ -1,9 +1,14 @@
 package bll.util;
 
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * In this class, we have the methods for playing songs.
@@ -17,8 +22,16 @@ public class MusicPlayer
     private boolean hasBeenPaused;
     private Media oldMedia;
 
+    private Timer timer;
+    private double timeElapsed;
+    private double timeRemaning;
+    private boolean isSongFinished = false;
+
+
+
     public MusicPlayer()
     {
+        timer=new Timer();
     }
 
     //We update the media and play the file.
@@ -82,6 +95,64 @@ public class MusicPlayer
     public boolean isPlaying()
     {
         return isPlaying;
+    }
+
+    public TimerTask setElapsedTime()
+    {
+        TimerTask t = new TimerTask()
+        {
+            @Override
+            public void run() {
+                if (mp != null) {
+                    timeElapsed = mp.getCurrentTime().toSeconds();
+                }
+            }
+        };
+        return t;
+    }
+    public TimerTask setTimeRemaning()
+    {
+        TimerTask t= new TimerTask() {
+            @Override
+            public void run() {
+                if(timeElapsed != 0.00 && mp != null)
+                {
+                    timeRemaning= mp.getTotalDuration().toSeconds()-timeElapsed;
+                }
+            }
+        };
+        return t;
+    }
+
+    public void setSongFinished(boolean b)
+    {
+        isSongFinished=b;
+    }
+    public TimerTask isSongFinishedTask() {
+
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                if(timeRemaning <=0.00 && isPlaying)
+                {
+                    isSongFinished = true;
+                }
+            }
+        };
+
+        return t;
+    }
+    public boolean isSongFinished()
+    {
+        return isSongFinished;
+    }
+    public void timer(TimerTask t)
+    {
+        timer.scheduleAtFixedRate(setElapsedTime(), 1000,1000);
+        timer.scheduleAtFixedRate(setTimeRemaning(), 1000,1000);
+        timer.scheduleAtFixedRate(isSongFinishedTask(), 1000, 3000);
+        timer.scheduleAtFixedRate(t, 1000, 1000);
+
     }
 
 }

@@ -17,6 +17,7 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
     @FXML
@@ -42,7 +43,7 @@ public class MyTunesController implements Initializable {
     @FXML
     private TextField txtSearchBar;
     @FXML
-    private Label lblNowPlaying;
+    private TextField lblNowPlaying;
 
 
     private MyTunesModel myTunesModel;
@@ -223,6 +224,48 @@ public class MyTunesController implements Initializable {
             }
         }
     }
+    public TimerTask continuePlaying()
+    {
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run()
+            {{if(myTunesModel.isSongFinished())
+                if(tvSongTable.getSelectionModel().getSelectedItem() == null && tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
+                {
+                    if(tvPlaylistSongTable.getSelectionModel().getSelectedIndex()+1 == tvPlaylistSongTable.getItems().size())
+                    {
+                        tvPlaylistSongTable.getSelectionModel().selectFirst();
+                        lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                        myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                    }
+                    else
+                    {
+                        tvPlaylistSongTable.getSelectionModel().selectNext();
+                        lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                        myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                    }
+                }
+                else if (tvSongTable.getSelectionModel().getSelectedItem() != null)
+                {
+                    if(tvSongTable.getSelectionModel().getSelectedIndex()+1 == tvSongTable.getItems().size())
+                    {
+                        tvSongTable.getSelectionModel().selectFirst();
+                        lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                        myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                    }
+                    else
+                    {
+                        tvSongTable.getSelectionModel().selectNext();
+                        lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                        myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                    }
+                }
+            }
+            myTunesModel.setSongFinished(false);
+            }
+        };
+        return t;
+    }
 
     //Shows the list of songs from a playlist in the Listview.
     public void showPlaylist(MouseEvent mouseEvent) {
@@ -259,7 +302,7 @@ public class MyTunesController implements Initializable {
         //Initializes the songs and playlists
         setTvSongTable();
         setTcPlaylistTable();
-
+        myTunesModel.timer(continuePlaying());
         //Search function
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimerTask;
 
 /**
  * In this class we acces the bll, to handle the connection from gui to bll.
@@ -121,6 +122,19 @@ public class MyTunesModel
     public void swapSongsInPlaylist(int i, int j) throws Exception {
         Collections.swap(playlistWithSongs, i, j);
         //bll.swapSongsInPlaylist(selectedPlaylist.getValue().getId(), playlistWithSongs.get(i).getId(), playlistWithSongs.get(j).getId()); // todo
+    }
+    public void timer(TimerTask t)
+    {
+        lm.timer(t);
+    }
+    public boolean isSongFinished()
+    {
+        return lm.isSongFinished();
+    }
+
+    public void setSongFinished(boolean b)
+    {
+        lm.setSongFinished(b);
     }
 }
 

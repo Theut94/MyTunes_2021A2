@@ -10,6 +10,7 @@ import dal.SongDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.TimerTask;
 
 /**
  * This is the class where we handle input from the Gui and  use methods from the dal and be, to return the right output.
@@ -26,6 +27,17 @@ public class LogicManager
         mp = new MusicPlayer();
     }
 
+    public void setSongFinished(boolean b)
+    {
+        mp.setSongFinished(b);
+    }
+    public boolean isSongFinished() {
+        return mp.isSongFinished();
+    }
+    public void timer(TimerTask t)
+    {
+        mp.timer(t);
+    }
     /**
      * Methods for playing Songs
      */

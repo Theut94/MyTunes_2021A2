@@ -45,7 +45,7 @@ public class Playlist
         return playlistName.get();
     }
 
-    //is being used.
+    //is being used by a PropertyValueFactory in MTC.
     public String getPlaylistTimelength() {
         return playlistTimelength.get();
     }

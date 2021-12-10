@@ -45,6 +45,11 @@ public class Playlist
         return playlistName.get();
     }
 
+    //is being used.
+    public String getPlaylistTimelength() {
+        return playlistTimelength.get();
+    }
+
     public int getPlaylistSongCount() {
         return playlistSongCount.get();
     }

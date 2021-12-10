@@ -171,8 +171,9 @@ public class PlaylistDAO {
         int pId = playlist.getPlaylistId();
         int meId = song.getSongId();
         int index = playlist.getListOfSongs().indexOf(song);
+        System.out.println(index);
 
-        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND playlist=(?); ";
+        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND placement=(?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 

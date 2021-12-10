@@ -101,11 +101,13 @@ public class MyTunesModel
     {
         lm.addToPlaylist(playlist, song);
         playlistWithSongs.add(song);
+        updatePlaylist(playlist);
     }
     public void removeFromPlaylist(Playlist playlist, Song song) throws  Exception
     {
         lm.removeFromPlaylist(playlist, song);
         playlistWithSongs.remove(song);
+        updatePlaylist(playlist);
     }
 
     public void clearPlaylist(Playlist playlist) throws Exception

@@ -119,7 +119,7 @@ public class PlaylistDAO {
         int pId = playlist.getPlaylistId();
 
         String sql1 = "DELETE FROM playlistContentTable WHERE playlistID = (?); ";
-        String sql2 = "DELETE FROM playlistTABLE WHERE playlistID=(?);";
+        String sql2 = "DELETE FROM playlistTable WHERE playlistID=(?);";
 
         try(Connection connection = DC.getConnection())
         {

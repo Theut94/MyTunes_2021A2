@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
+    public Slider volumeController;
     @FXML
     private TableView<Song> tvPlaylistSongTable;
     @FXML
@@ -344,5 +345,16 @@ public class MyTunesController implements Initializable {
     public void clearPlaylistSongTable(MouseEvent mouseEvent) {
 
         tvPlaylistSongTable.getSelectionModel().clearSelection();
+    }
+
+    public void setVolume(MouseEvent mouseDragEvent)
+    {
+        myTunesModel.setVolume(volumeController.getValue());
+        System.out.println(volumeController.getValue());
+    }
+
+    public void setFinishVolume(MouseEvent mouseDragEvent)
+    {
+        myTunesModel.setVolume(volumeController.getValue());
     }
 }

@@ -134,9 +134,16 @@ public class LogicManager
     {
         playlistDAO.updatePlaylist(playlist);
     }
+
     public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception
     {
         playlistDAO.moveSongsInPlaylist(playlist, i, j);
     }
+
+    public void setVolume(double volume)
+    {
+        mp.setMusicVolume(volume);
+    }
+
 }
 

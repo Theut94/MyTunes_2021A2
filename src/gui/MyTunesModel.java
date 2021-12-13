@@ -138,6 +138,11 @@ public class MyTunesModel
     {
         lm.setSongFinished(b);
     }
+
+    public void setVolume(double volume)
+    {
+        lm.setVolume(volume);
+    }
 }
 
 

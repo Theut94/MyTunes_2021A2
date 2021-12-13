@@ -21,6 +21,7 @@ public class MusicPlayer
     private Duration timeWhenPaused;
     private boolean hasBeenPaused;
     private Media oldMedia;
+    private double volume = 1.0;
 
     private Timer timer;
     private double timeElapsed;
@@ -40,6 +41,7 @@ public class MusicPlayer
         try{
             media = new Media(file);
             mp = new MediaPlayer(media);
+            mp.setVolume(volume);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,7 +49,7 @@ public class MusicPlayer
        if(!hasBeenPaused || !oldMedia.getSource().equals(media.getSource()))
        {
            mp.play();
-           mp.setAutoPlay(true);
+           mp.setVolume(volume);
            isPlaying = true;
            hasBeenPaused = false;
 
@@ -81,6 +83,7 @@ public class MusicPlayer
         mp = null;
         isPlaying = false;
         playSong(nextSongFile);
+        mp.setVolume(volume);
     }
 
     //we get the song prior to the on we are listening to, and reset the mediaplayer with this song.
@@ -90,6 +93,7 @@ public class MusicPlayer
         mp = null;
         isPlaying = false;
         playSong(previousSongFile);
+        mp.setVolume(volume);
     }
 
     public boolean isPlaying()
@@ -164,4 +168,15 @@ public class MusicPlayer
 
     }
 
+    // Sets the volume in the music player and stores the volume.
+    public void setMusicVolume(double musicVolume) {
+        volume = musicVolume /100;
+        if (mp!= null)
+        {mp.setVolume(volume);
+        System.out.println(mp.getVolume());}
+    }
+
+    public double getMusicVolume() {
+        return mp.getVolume();
+    }
 }

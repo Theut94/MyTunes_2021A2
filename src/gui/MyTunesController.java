@@ -20,7 +20,8 @@ import java.util.ResourceBundle;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
-    public Slider volumeController;
+    @FXML
+    private Slider volumeController;
     @FXML
     private TableView<Song> tvPlaylistSongTable;
     @FXML

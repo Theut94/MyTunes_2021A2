@@ -12,7 +12,7 @@ public class SimpleDialog {
 
     /**
      * Opens a window to ask user to confirm deletion
-     * @return 0 if OK is pressed, 1 if Cancel is pressed
+     * @return true if OK is pressed, false if Cancel is pressed
      */
     public static boolean delete(){
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete?",

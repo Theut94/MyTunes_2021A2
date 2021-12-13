@@ -55,15 +55,24 @@ public class MyTunesController implements Initializable {
 
     }
 
+    /**
+     * Adds the selected song to the selected playlist when then button is pressed
+     */
     public void addToPlaylist(ActionEvent actionEvent) throws Exception {
         myTunesModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Opens the dialog to get user input to name a new playlist, then creates playlist with that name
+     */
     public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
         myTunesModel.createPlaylist(name);
     }
 
+    /**
+     * Opens the dialog to get user input for the name of the playlist, then updates the selected playlist with the new name
+     */
     public void updatePlaylist(ActionEvent actionEvent) throws Exception {
         if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
@@ -72,11 +81,15 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    /**
+     * Creates a dialog to ask the user to confirm the deletion, then deletes the selected playlist
+     */
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
             myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
         tvPlaylists.refresh();
     }
+
 
     public void positionUp(ActionEvent actionEvent) throws Exception  {
         changeOrderInPlaylist(-1);
@@ -91,7 +104,9 @@ public class MyTunesController implements Initializable {
                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
     }
 
-    //Method to delete a song from a playlist når der er lavet
+    /**
+     * Creates a dialog to ask the user to confirm the deletion, then removes the selected song from the current playlist
+     */
     public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete())
         {
@@ -127,13 +142,19 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    /**
+     * Creates a dialog to ask the user to confirm the deletion, then deletes the selected song
+     */
     public void deleteSong(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null) {
             myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }
     }
-    // Plays or pauses a song - it detects both if the musicplayer is playing or if it is paused
-    // it also checks if there is no song selected from the songtable and tries to play the start of a playlist.
+
+    /**
+     * Plays or pauses a song - it detects both if the music player is playing or if it is paused
+     * it also checks if there is no song selected from the song table and tries to play the start of a playlist.
+     */
     public void playPause(ActionEvent actionEvent)
     {
         if(!myTunesModel.isPlaying())
@@ -161,7 +182,10 @@ public class MyTunesController implements Initializable {
         }
 
     }
-    //gets the previous song from the playlist or songtable
+
+    /**
+     * Gets the previous song from the playlist or song table
+     */
     public void previousSong(ActionEvent actionEvent)
     {
         if(tvSongTable.getSelectionModel().getSelectedItem() == null) {
@@ -192,7 +216,9 @@ public class MyTunesController implements Initializable {
 
     }
 
-    //gets the next song from the playlist or song table
+    /**
+     * Gets the next song from the playlist or song table
+     */
     public void nextSong(ActionEvent actionEvent)
     {
         if(tvSongTable.getSelectionModel().getSelectedItem() == null)
@@ -226,6 +252,10 @@ public class MyTunesController implements Initializable {
             }
         }
     }
+
+    /**
+     * Handles the autoplay functionality
+     */
     public TimerTask continuePlaying()
     {
         TimerTask t = new TimerTask() {
@@ -269,7 +299,9 @@ public class MyTunesController implements Initializable {
         return t;
     }
 
-    //Shows the list of songs from a playlist in the Listview.
+    /**
+     * When a playlist is clicked then songs on the playlist are shown in the middle table
+     */
     public void showPlaylist(MouseEvent mouseEvent) {
         tvPlaylistSongTable.getItems().clear();
         try{
@@ -298,14 +330,15 @@ public class MyTunesController implements Initializable {
         return stage;
     }
 
-    // needs fixing evt. foreach loop gennem listen og så tilføje hvert enkelt properties for hver sang?
+    /**
+     * Initializes the songs, playlists, autoplay timer and search function when the program is launched
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Initializes the songs and playlists
         setTvSongTable();
         setTcPlaylistTable();
+
         myTunesModel.timer(continuePlaying());
-        //Search function
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{
                 myTunesModel.searchSongs(newValue);
@@ -315,6 +348,9 @@ public class MyTunesController implements Initializable {
         });
     }
 
+    /**
+     * Method used for initializing the playlists
+     */
     public void setTcPlaylistTable() {
         tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
         tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
@@ -326,6 +362,9 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    /**
+     * Method used for initializing the song table
+     */
     private void setTvSongTable() {
         tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
@@ -337,10 +376,16 @@ public class MyTunesController implements Initializable {
         }
     }
 
+    /**
+     * Clears the selected song on the song table
+     */
     public void clearSongTableSelection(MouseEvent mouseEvent) {
         tvSongTable.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Clears the selected song on the playlist song table
+     */
     public void clearPlaylistSongTable(MouseEvent mouseEvent) {
 
         tvPlaylistSongTable.getSelectionModel().clearSelection();

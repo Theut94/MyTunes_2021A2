@@ -30,29 +30,26 @@ public class MyTunesModel
         playlistWithSongs = FXCollections.observableArrayList();
     }
 
-    public void playSong(Song song)
-    {
+    public void playSong(Song song) {
         lm.playSong(song);
-
     }
-    public void stopPlaying()
-    {
+
+    public void stopPlaying() {
         lm.stopPlaying();
     }
 
-    public boolean isPlaying()
-    {
+    public boolean isPlaying() {
         return lm.isPlaying();
     }
-    public void nextSong(Song song){lm.nextSong(song);}
 
-    public void previousSong( Song song)
-    {
+    public void nextSong(Song song){
+        lm.nextSong(song);}
+
+    public void previousSong(Song song) {
         lm.previousSong(song);
     }
 
-    public void createSong(String name, String artistName, String filePath, String songLength) throws Exception
-    {
+    public void createSong(String name, String artistName, String filePath, String songLength) throws Exception {
         songlist.add(lm.createSong(name, artistName, filePath, songLength));
     }
 
@@ -65,77 +62,75 @@ public class MyTunesModel
         songlist.clear();
         songlist.addAll(searchedSongs);
     }
+
     public void deleteSong(Song song) throws Exception {
         lm.deleteSong(song);
         songlist.remove(song);
     }
+
     public void updateSong(Song song) throws SQLException {
         lm.updateSong(song);
         songlist.clear();
         songlist.addAll(lm.getAllSongs());
-
     }
 
     public ObservableList<Playlist> getAllPlaylists() throws Exception {
         return playlistlist;
     }
 
-    public void createPlaylist (String name) throws Exception
-    {
+    public void createPlaylist (String name) throws Exception {
         lm.createPlaylist(name);
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
-    public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception
-    {
+    public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception {
         playlistWithSongs.addAll(lm.getPlaylist(playlist));
         return playlistWithSongs;
     }
-    public void deletePlaylist (Playlist playlist)
-    {
+
+    public void deletePlaylist (Playlist playlist) {
         playlistlist.remove(playlist);
         lm.deletePlaylist(playlist);
     }
-    public void addToPlaylist(Playlist playlist, Song song) throws Exception
-    {
+
+    public void addToPlaylist(Playlist playlist, Song song) throws Exception {
         lm.addToPlaylist(playlist, song);
         playlistWithSongs.add(song);
         updatePlaylist(playlist);
     }
-    public void removeFromPlaylist(Playlist playlist, Song song, int i) throws  Exception
-    {
+
+    public void removeFromPlaylist(Playlist playlist, Song song, int i) throws  Exception {
         lm.removeFromPlaylist(playlist, i);
         playlistWithSongs.remove(song);
         updatePlaylist(playlist);
     }
 
-    public void clearPlaylist(Playlist playlist) throws Exception
-    {
+    public void clearPlaylist(Playlist playlist) throws Exception {
         lm.clearPlaylist(playlist);
         playlistWithSongs.clear();
     }
-    public void updatePlaylist(Playlist playlist) throws  Exception
-    {
+
+    public void updatePlaylist(Playlist playlist) throws  Exception {
         lm.updatePlaylist(playlist);
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
+
     public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception {
         Collections.swap(playlistWithSongs, i, j);
         lm.swapSongsInPlaylist(playlist, i, j);
     }
-    public void timer(TimerTask t)
-    {
+
+    public void timer(TimerTask t) {
         lm.timer(t);
     }
-    public boolean isSongFinished()
-    {
+
+    public boolean isSongFinished() {
         return lm.isSongFinished();
     }
 
-    public void setSongFinished(boolean b)
-    {
+    public void setSongFinished(boolean b) {
         lm.setSongFinished(b);
     }
 }

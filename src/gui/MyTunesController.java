@@ -45,7 +45,7 @@ public class MyTunesController implements Initializable {
     @FXML
     private TextField txtSearchBar;
     @FXML
-    private TextField lblNowPlaying;
+    private TextField txtNowPlaying;
 
 
     private MyTunesModel myTunesModel;
@@ -164,11 +164,11 @@ public class MyTunesController implements Initializable {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
                 myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
-                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
             }
             else if (tvSongTable.getSelectionModel().getSelectedItem()!= null)
             {
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
 
             }
@@ -193,11 +193,11 @@ public class MyTunesController implements Initializable {
         if(tvSongTable.getSelectionModel().getSelectedItem() == null) {
             if (tvPlaylistSongTable.getSelectionModel().getSelectedIndex() == 0) {
                 tvPlaylistSongTable.getSelectionModel().selectLast();
-                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             } else {
                 tvPlaylistSongTable.getSelectionModel().selectPrevious();
-                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.previousSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
         }
@@ -206,12 +206,12 @@ public class MyTunesController implements Initializable {
             if(tvSongTable.getSelectionModel().getSelectedIndex() == 0)
             {
                 tvSongTable.getSelectionModel().selectLast();
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());}
             else
             {
                 tvSongTable.getSelectionModel().selectPrevious();
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
         }
@@ -228,13 +228,13 @@ public class MyTunesController implements Initializable {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedIndex()+1 == tvPlaylistSongTable.getItems().size())
             {
                 tvPlaylistSongTable.getSelectionModel().selectFirst();
-                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
             else
             {
                 tvPlaylistSongTable.getSelectionModel().selectNext();
-                lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
         }
@@ -243,13 +243,13 @@ public class MyTunesController implements Initializable {
             if(tvSongTable.getSelectionModel().getSelectedIndex()+1 == tvSongTable.getItems().size())
             {
                 tvSongTable.getSelectionModel().selectFirst();
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
             else
             {
                 tvSongTable.getSelectionModel().selectNext();
-                lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                 myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
         }
@@ -269,13 +269,13 @@ public class MyTunesController implements Initializable {
                     if(tvPlaylistSongTable.getSelectionModel().getSelectedIndex()+1 == tvPlaylistSongTable.getItems().size())
                     {
                         tvPlaylistSongTable.getSelectionModel().selectFirst();
-                        lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                        txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                         myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
                     }
                     else
                     {
                         tvPlaylistSongTable.getSelectionModel().selectNext();
-                        lblNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
+                        txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
                         myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
                     }
                 }
@@ -284,13 +284,13 @@ public class MyTunesController implements Initializable {
                     if(tvSongTable.getSelectionModel().getSelectedIndex()+1 == tvSongTable.getItems().size())
                     {
                         tvSongTable.getSelectionModel().selectFirst();
-                        lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                        txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                         myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
                     }
                     else
                     {
                         tvSongTable.getSelectionModel().selectNext();
-                        lblNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
+                        txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
                         myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
                     }
                 }

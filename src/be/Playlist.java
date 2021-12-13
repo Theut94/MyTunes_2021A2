@@ -32,10 +32,7 @@ public class Playlist
     /*
     Here we want to return the list of songs
      */
-    public List<Song> getListOfSongs()
-    {
-        return listOfSongs;
-    }
+
     public void addSongToList(Song song)
     {
         listOfSongs.add(song);

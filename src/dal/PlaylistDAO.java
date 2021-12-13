@@ -218,6 +218,7 @@ public class PlaylistDAO {
         PreparedStatement pst2 = connection.prepareStatement(sql2);
         PreparedStatement pst3 = connection.prepareStatement(sql3);
 
+        //Fancy sql magic to switch placement of two songs
         pst1.setInt(1, pId);
         pst1.setInt(2, index2);
 
@@ -253,23 +254,25 @@ public class PlaylistDAO {
 
     }
 
-
+    //test Main to test database stuff
     public static void main(String[] args) throws Exception {
         PlaylistDAO DAO = new PlaylistDAO();
 
-        if (true == true) //Set to true to run
+        if (true == false) //Set to true to run
         {
-            //DAO.createPlaylistTable();
+            //(re)creates new tables in database
+            DAO.createPlaylistTable();
             DAO.createPlaylistContentTable();
-            //DAO.createSongsTable();
+            DAO.createSongsTable();
 
+            //clears all data in tables
             //DAO.clearPlaylistTable();
             //DAO.clearPlaylistContentTable();
             //DAO.clearSongsTable();
         }
     }
 
-    //clears playlistTable
+    //clears playlistTable of all data
     public void clearPlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -279,7 +282,7 @@ public class PlaylistDAO {
         ps.executeUpdate();
     }
 
-    //clears playlistContentTable
+    //clears playlistContentTable of all data
     public void clearPlaylistContentTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -289,7 +292,7 @@ public class PlaylistDAO {
         ps.executeUpdate();
     }
 
-    //clears songsTable
+    //clears songsTable of all data
     public void clearSongsTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -299,7 +302,8 @@ public class PlaylistDAO {
         ps.executeUpdate();
     }
 
-    //creates a new playlistTable
+    //(re)creates a new playlistTable
+    //if swiching database run this in the test main to create new tables in new database
     public void createPlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -313,7 +317,8 @@ public class PlaylistDAO {
         ps.executeUpdate();
     }
 
-    //creates a new playlistContentTable
+    //(re)creates a new playlistContentTable
+    //if swiching database run this in the test main to create new tables in new database
     public void createPlaylistContentTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -325,7 +330,8 @@ public class PlaylistDAO {
         ps2.executeUpdate();
     }
 
-    //creates a new songsTable
+    //(re)creates a new songsTable
+    //if swiching database run this in the test main to create new tables in new database
     public void createSongsTable() throws Exception
     {
         Connection connection = DC.getConnection();

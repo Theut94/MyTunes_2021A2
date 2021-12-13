@@ -175,8 +175,4 @@ public class MusicPlayer
         {mp.setVolume(volume);
         System.out.println(mp.getVolume());}
     }
-
-    public double getMusicVolume() {
-        return mp.getVolume();
-    }
 }

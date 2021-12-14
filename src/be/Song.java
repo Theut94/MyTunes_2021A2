@@ -33,9 +33,6 @@ public class Song
         return name.get();
     }
 
-    public void setName(String name) {
-        this.name.set(name);
-    }
 
     public int getSongId() {
         return songId.get();
@@ -45,21 +42,18 @@ public class Song
         return artistName.get();
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName.set(artistName);
-    }
+
+
 
     public String getSongLength() {
         return songLength.get();
     }
 
-    public void setSongLength(String songLength) {
-        this.songLength.set(songLength);
-    }
+
 
     public String getFilePath() {
         return filePath;
     }
 
-    public void setFilePath(String filePath) { this.filePath = filePath; }
+
 }

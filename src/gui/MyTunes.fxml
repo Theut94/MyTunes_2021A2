@@ -61,7 +61,8 @@
             <TableColumn fx:id="tcPlaylistSongs" prefWidth="258.0" text="Title" />
          </columns>
       </TableView>
-      <TextField fx:id="lblNowPlaying" alignment="CENTER" editable="false" layoutX="275.0" layoutY="25.0" prefHeight="40.0" prefWidth="350.0" style="-fx-background-color: transparent;" text="No song is playing.">
+      <TextField fx:id="txtNowPlaying" alignment="CENTER" editable="false" layoutX="321.0" layoutY="22.0" style="-fx-background-color: transparent;" text="No song is playing.">
+
          <font>
             <Font size="20.0" />
          </font></TextField>
